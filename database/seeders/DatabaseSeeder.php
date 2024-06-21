@@ -13,5 +13,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // シードクラスの呼び出し
+        $this->call([
+            AreaSeeder::class,
+            AttendanceSeeder::class,
+            UserStatusSeeder::class,
+            UserSeeder::class,
+        ]);
     }
 }
