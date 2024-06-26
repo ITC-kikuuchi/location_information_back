@@ -27,7 +27,18 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            User::MAIL_ADDRESS => ['required'],
+            User::PASSWORD => ['required'],
         ];
+    }
+
+    /**
+     * エラーハンドリング
+     *
+     * @param Validator $validator
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException($this->unprocessableEntityResponse($validator->errors()->toArray()));
     }
 }
