@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     // テーブ名
-    const TABLE = 'm_users';
+    const TABLE = 'm_user';
     public $table = self::TABLE;
 
     // カラム名
