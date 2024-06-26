@@ -28,4 +28,19 @@ class AuthService
     public function __construct(protected UserRepositoryInterface $userRepositoryInterface)
     {
     }
+
+    /**
+     * ユーザに関するレスポンスの作成
+     *
+     * @param object $loginUser
+     * @return array
+     */
+    private function userResponse(object $loginUser): array
+    {
+        return [
+            User::ID => $loginUser[User::ID],
+            User::USER_NAME => $loginUser[User::USER_NAME],
+            User::IS_ADMIN => $loginUser[User::IS_ADMIN],
+        ];
+    }
 }
