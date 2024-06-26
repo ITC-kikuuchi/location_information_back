@@ -31,5 +31,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // ユーザステータスAPI
     Route::get('user-status', UserStatusController::class);
     // 位置情報API
-    Route::get('user-location', UserLocationController::class, ['only' => ['index', 'show', 'update']]);
+    Route::apiResource('user-location', UserLocationController::class, ['only' => ['index', 'show', 'update']]);
 });
