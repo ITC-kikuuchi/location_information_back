@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    /**
+     * UserController コンストラクタ
+     * UserService の依存性を注入する
+     *
+     * @param UserService $userService
+     */
+    public function __construct(protected UserService $userService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\AreaService;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
+    /**
+     * AuthController コンストラクタ
+     * AuthService の依存性を注入する
+     *
+     * @param AuthService $authService
+     */
+    public function __construct(protected AreaService $authService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */

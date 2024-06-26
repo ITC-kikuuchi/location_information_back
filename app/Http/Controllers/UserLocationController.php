@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\UserLocationService;
 use Illuminate\Http\Request;
 
 class UserLocationController extends Controller
 {
+    /**
+     * UserLocationController コンストラクタ
+     * UserLocationService の依存性を注入する
+     *
+     * @param UserLocationService $userLocationService
+     */
+    public function __construct(protected UserLocationService $userLocationService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
