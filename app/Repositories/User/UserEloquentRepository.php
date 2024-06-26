@@ -17,4 +17,15 @@ class UserEloquentRepository implements UserRepositoryInterface
     public function __construct(protected User $user)
     {
     }
+
+    /**
+     * ユーザ詳細取得
+     *
+     * @param integer $id
+     * @return object|null
+     */
+    public function getUser(int $id): object|null
+    {
+        return $this->user->find($id);
+    }
 }
