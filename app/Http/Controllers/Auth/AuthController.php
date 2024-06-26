@@ -22,10 +22,13 @@ class AuthController extends Controller
 
     /**
      * ログインAPI
+     *
+     * @param LoginRequest $request
+     * @return JsonResponse
      */
-    public function login()
+    public function login(LoginRequest $request): JsonResponse
     {
-        //
+        return $this->authService->login($request);
     }
 
     /**
