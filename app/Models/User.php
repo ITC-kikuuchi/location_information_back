@@ -9,39 +9,40 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    // テーブ名
+    const TABLE = 'm_users';
+    public $table = self::TABLE;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    // カラム名
+    const ID = 'id';
+    const MAIL_ADDRESS = 'mail_address';
+    const PASSWORD = 'password';
+    const USER_NAME = 'user_name';
+    const USER_NAME_KANA = 'user_name_kana';
+    const DEFAULT_AREA_ID = 'default_area_id';
+    const IS_ADMIN = 'is_admin';
+    const AREA_ID = 'area_id';
+    const ATTENDANCE_ID = 'attendance_id';
+    const USER_STATUS_ID = 'user_status_id';
+    const CREATED_ID = 'created_id';
+    const UPDATED_ID = 'updated_id';
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        self::ID,
+        self::MAIL_ADDRESS,
+        self::PASSWORD,
+        self::USER_NAME,
+        self::USER_NAME_KANA,
+        self::DEFAULT_AREA_ID,
+        self::IS_ADMIN,
+        self::AREA_ID,
+        self::ATTENDANCE_ID,
+        self::USER_STATUS_ID,
+        self::CREATED_ID,
+        self::UPDATED_ID,
+        self::CREATED_AT,
+        self::UPDATED_AT,
     ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
 }
