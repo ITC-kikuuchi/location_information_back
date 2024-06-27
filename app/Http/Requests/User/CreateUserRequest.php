@@ -28,7 +28,22 @@ class CreateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            User::USER_NAME => ['required', 'max:255'],
+            User::USER_NAME_KANA => ['required', 'max:255'],
+            User::MAIL_ADDRESS => ['required', 'max:255'],
+            User::PASSWORD => ['required', 'max:255'],
+            User::IS_ADMIN => ['required'],
+            User::DEFAULT_AREA_ID => ['required']
         ];
+    }
+
+    /**
+     * エラーハンドリング
+     *
+     * @param Validator $validator
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException($this->unprocessableEntityResponse($validator->errors()->toArray()));
     }
 }
