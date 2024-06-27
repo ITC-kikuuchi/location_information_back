@@ -62,6 +62,32 @@ class AuthService
     }
 
     /**
+     * ログイン情報取得
+     *
+     * @return JsonResponse
+     */
+    public function me(): JsonResponse
+    {
+        // 初期値設定
+        $responseData = [];
+        try {
+            // 認証ユーザの ID に紐づくユーザ情報の取得
+            $loginUser = $this->userRepositoryInterface->getUser(Auth::id());
+            if (!$loginUser) {
+                // ID に紐づくユーザ情報が存在しない場合
+                throw new UnauthorizedException();
+            }
+            // レスポンスデータの作成
+            $responseData = $this->userResponse($loginUser);
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse($responseData);
+    }
+
+    /**
      * ユーザに関するレスポンスの作成
      *
      * @param object $loginUser
