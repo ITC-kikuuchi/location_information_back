@@ -23,9 +23,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // ログイン情報取得API
     Route::get('me', [AuthController::class, 'me']);
     // 社員情報API
-    Route::apiResource('Users', UserController::class, ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+    Route::apiResource('users', UserController::class, ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
     // エリアAPI
-    Route::apiResource('Areas', AreaController::class, ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+    Route::apiResource('areas', AreaController::class, ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
     // 勤怠API
     Route::get('attendance', AttendanceController::class);
     // ユーザステータスAPI
