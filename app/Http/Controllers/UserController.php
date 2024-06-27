@@ -30,11 +30,14 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * ユーザ登録API
+     *
+     * @param CreateUserRequest $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request): JsonResponse
     {
-        //
+        return $this->userService->createUser($request);
     }
 
     /**
