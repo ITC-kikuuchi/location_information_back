@@ -45,4 +45,7 @@ class User extends Authenticatable
         self::CREATED_AT,
         self::UPDATED_AT,
     ];
+
+    // レスポンスで使用する key
+    const USER_LIST = 'user_list';
 }
