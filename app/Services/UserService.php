@@ -41,7 +41,7 @@ class UserService
             // ユーザ一覧取得
             $users = $this->userRepositoryInterface->getUsers();
             // レスポンスデータの作成
-            foreach($users as $user) {
+            foreach ($users as $user) {
                 $responseData[User::USER_LIST][] = [
                     User::ID => $user[User::ID],
                     User::USER_NAME => $user[User::USER_NAME],
