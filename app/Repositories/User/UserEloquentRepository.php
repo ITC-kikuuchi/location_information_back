@@ -19,6 +19,16 @@ class UserEloquentRepository implements UserRepositoryInterface
     }
 
     /**
+     * ユーザ一覧取得
+     *
+     * @return object|null
+     */
+    public function getUsers(): object|null
+    {
+        return $this->user->get();
+    }
+
+    /**
      * ユーザ詳細取得
      *
      * @param integer $id
