@@ -14,6 +14,13 @@ interface UserRepositoryInterface
     public function getUsers(): object|null;
 
     /**
+     * ユーザ登録処理
+     *
+     * @param array $createUser
+     */
+    public function createUser(array $createUser);
+
+    /**
      * ユーザ詳細取得
      *
      * @param integer $id
