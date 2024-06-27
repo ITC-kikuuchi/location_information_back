@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\UserService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -18,11 +19,13 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * ユーザ一覧取得API
+     *
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        return $this->userService->getUsers();
     }
 
     /**
