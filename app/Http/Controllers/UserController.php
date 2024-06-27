@@ -19,11 +19,13 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * ユーザ一覧取得API
+     *
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        return $this->userService->getUsers();
     }
 
     /**
