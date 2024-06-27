@@ -59,6 +59,30 @@ class UserService
     }
 
     /**
+     * ユーザ登録処理
+     *
+     * @param CreateUserRequest $request
+     * @return JsonResponse
+     */
+    public function createUser(CreateUserRequest $request): JsonResponse
+    {
+        try {
+            // 登録データの作成
+            $createData = $this->createUserData($request);
+            // データベーストランザクションの開始
+            DB::transaction(function () use ($createData) {
+                // データ登録処理
+                $this->userRepositoryInterface->createUser($createData);
+            });
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse();
+    }
+
+    /**
      * ユーザ情報作成処理
      *
      * @param object $request
