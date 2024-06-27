@@ -57,4 +57,22 @@ class UserService
         // 200 レスポンス
         return $this->okResponse($responseData);
     }
+
+    /**
+     * ユーザ情報作成処理
+     *
+     * @param object $request
+     * @return array
+     */
+    private function createUserData(object $request)
+    {
+        return [
+            User::USER_NAME => $request[User::USER_NAME],
+            User::USER_NAME_KANA => $request[User::USER_NAME_KANA],
+            User::MAIL_ADDRESS => $request[User::MAIL_ADDRESS],
+            User::PASSWORD => Hash::make($request[User::PASSWORD]),
+            User::IS_ADMIN => $request[User::IS_ADMIN],
+            User::DEFAULT_AREA_ID  => $request[User::DEFAULT_AREA_ID]
+        ];
+    }
 }
