@@ -98,7 +98,7 @@ class AuthService
         return [
             User::ID => $loginUser[User::ID],
             User::USER_NAME => $loginUser[User::USER_NAME],
-            User::IS_ADMIN => $loginUser[User::IS_ADMIN],
+            User::IS_ADMIN => (bool)$loginUser[User::IS_ADMIN],
         ];
     }
 }
