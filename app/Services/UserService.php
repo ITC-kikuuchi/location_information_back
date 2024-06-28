@@ -38,6 +38,7 @@ class UserService
      */
     public function getUsers(): JsonResponse
     {
+        // 初期値設定
         $responseData = [];
         try {
             // ユーザ一覧取得
@@ -61,7 +62,7 @@ class UserService
     }
 
     /**
-     * ユーザ登録処理
+     * ユーザ登録
      *
      * @param CreateUserRequest $request
      * @return JsonResponse
