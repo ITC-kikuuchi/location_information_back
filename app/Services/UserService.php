@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Traits\DataExistenceCheckTrait;
 use App\Traits\ExceptionHandlerTrait;
 use App\Traits\ResponseTrait;
 use Exception;
@@ -18,6 +19,7 @@ class UserService
 {
     use ResponseTrait;
     use ExceptionHandlerTrait;
+    use DataExistenceCheckTrait;
 
     /**
      * UserService コンストラクタ
@@ -36,6 +38,7 @@ class UserService
      */
     public function getUsers(): JsonResponse
     {
+        // 初期値設定
         $responseData = [];
         try {
             // ユーザ一覧取得
@@ -59,7 +62,7 @@ class UserService
     }
 
     /**
-     * ユーザ登録処理
+     * ユーザ登録
      *
      * @param CreateUserRequest $request
      * @return JsonResponse
@@ -80,6 +83,38 @@ class UserService
         }
         // 200 レスポンス
         return $this->okResponse();
+    }
+
+    /**
+     * ユーザ詳細取得
+     *
+     * @param integer $id
+     * @return JsonResponse
+     */
+    public function getUserDetail(int $id): JsonResponse
+    {
+        // 初期値設定
+        $responseData = [];
+        try {
+            // id に紐づくユーザの取得
+            $userData = $this->userRepositoryInterface->getUser($id);
+            // データ存在チェック
+            $this->dataExistenceCheck($userData);
+            // レスポンスデータの作成
+            $responseData = [
+                User::ID => $userData[User::ID],
+                User::USER_NAME => $userData[User::USER_NAME],
+                User::USER_NAME_KANA => $userData[User::USER_NAME_KANA],
+                User::MAIL_ADDRESS => $userData[User::MAIL_ADDRESS],
+                User::IS_ADMIN => (boolean)$userData[User::IS_ADMIN],
+                User::DEFAULT_AREA_ID => $userData[User::DEFAULT_AREA_ID],
+            ];
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse($responseData);
     }
 
     /**
