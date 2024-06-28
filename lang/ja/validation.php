@@ -151,8 +151,18 @@ return [
     'url'                  => ':Attributeは、有効なURL形式で指定してください。',
     'uuid'                 => ':Attributeは、有効なUUIDである必要があります。',
 
+    'custom' => [
+        'password' => [
+            'regex' => ':Attributeには、半角英数字を使用してください。'
+        ]
+    ],
+
     'attributes' => [
         'mail_address' => 'メールアドレス',
-        'password' => 'パスワード'
+        'password' => 'パスワード',
+        'user_name' => 'ユーザ名',
+        'user_name_kana' => 'ユーザ名（かな）',
+        'is_admin' => '管理者フラグ',
+        'default_area_id' => 'デフォルトエリアフラグ',
     ]
 ];
