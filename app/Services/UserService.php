@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Traits\DataExistenceCheckTrait;
 use App\Traits\ExceptionHandlerTrait;
 use App\Traits\ResponseTrait;
 use Exception;
@@ -18,6 +19,7 @@ class UserService
 {
     use ResponseTrait;
     use ExceptionHandlerTrait;
+    use DataExistenceCheckTrait;
 
     /**
      * UserService コンストラクタ
