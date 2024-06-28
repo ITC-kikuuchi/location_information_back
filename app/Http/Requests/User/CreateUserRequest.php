@@ -30,8 +30,8 @@ class CreateUserRequest extends FormRequest
         return [
             User::USER_NAME => ['required', 'max:255'],
             User::USER_NAME_KANA => ['required', 'max:255'],
-            User::MAIL_ADDRESS => ['required', 'max:255'],
-            User::PASSWORD => ['required', 'max:255'],
+            User::MAIL_ADDRESS => ['required', 'email:filter,dns' ,'max:255'],
+            User::PASSWORD => ['required', 'min:8', 'max:255', 'regex:/^[a-zA-Z0-9]+$/'],
             User::IS_ADMIN => ['required'],
             User::DEFAULT_AREA_ID => ['required']
         ];
