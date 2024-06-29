@@ -16,7 +16,7 @@ interface UserRepositoryInterface
     /**
      * ユーザ登録処理
      *
-     * @param array $createUser
+     * @param array $user
      */
     public function createUser(array $createUser);
 
