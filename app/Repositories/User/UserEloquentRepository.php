@@ -31,11 +31,11 @@ class UserEloquentRepository implements UserRepositoryInterface
     /**
      * ユーザ登録処理
      *
-     * @param array $createUser
+     * @param array $user
      */
-    public function createUser(array $createUser)
+    public function createUser(array $user)
     {
-        $this->user->create($createUser);
+        $this->user->create($user);
     }
 
     /**
