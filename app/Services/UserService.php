@@ -71,11 +71,11 @@ class UserService
     {
         try {
             // 登録データの作成
-            $createData = $this->createUserData($request);
+            $user = $this->createUserData($request);
             // データベーストランザクションの開始
-            DB::transaction(function () use ($createData) {
+            DB::transaction(function () use ($user) {
                 // データ登録処理
-                $this->userRepositoryInterface->createUser($createData);
+                $this->userRepositoryInterface->createUser($user);
             });
         } catch (Exception $e) {
             // エラーハンドリング
