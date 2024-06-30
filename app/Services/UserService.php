@@ -119,6 +119,35 @@ class UserService
     }
 
     /**
+     * ユーザ更新
+     *
+     * @param UpdateUserRequest $request
+     * @param integer $id
+     * @return JsonResponse
+     */
+    public function updateUser(UpdateUserRequest $request, int $id): JsonResponse
+    {
+        try {
+            // id に紐づくユーザの取得
+            $userData = $this->userRepositoryInterface->getUser($id);
+            // データ存在チェック
+            $this->dataExistenceCheck($userData);
+            // 更新データの作成
+            $user = $this->createUserData($request);
+            // データベーストランザクションの開始
+            DB::transaction(function () use ($id, $user) {
+                // データ更新処理
+                $this->userRepositoryInterface->updateUser($id, $user);
+            });
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse();
+    }
+
+    /**
      * ユーザ情報作成処理
      *
      * @param object $request
