@@ -106,7 +106,7 @@ class UserService
                 User::USER_NAME => $userData[User::USER_NAME],
                 User::USER_NAME_KANA => $userData[User::USER_NAME_KANA],
                 User::MAIL_ADDRESS => $userData[User::MAIL_ADDRESS],
-                User::IS_ADMIN => (boolean)$userData[User::IS_ADMIN],
+                User::IS_ADMIN => (bool)$userData[User::IS_ADMIN],
                 User::DEFAULT_AREA_ID => $userData[User::DEFAULT_AREA_ID],
             ];
         } catch (Exception $e) {
