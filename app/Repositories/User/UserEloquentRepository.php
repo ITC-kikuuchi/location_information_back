@@ -29,7 +29,7 @@ class UserEloquentRepository implements UserRepositoryInterface
     }
 
     /**
-     * ユーザ登録処理
+     * ユーザ登録
      *
      * @param array $user
      */
