@@ -53,11 +53,15 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * ユーザ更新API
+     *
+     * @param UpdateUserRequest $request
+     * @param string $id
+     * @return JsonResponse
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, string $id): JsonResponse
     {
-        //
+        return $this->userService->updateUser($request, $id);
     }
 
     /**
