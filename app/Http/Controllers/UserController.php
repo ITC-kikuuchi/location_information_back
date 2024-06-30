@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\CreateUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -52,11 +53,15 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * ユーザ更新API
+     *
+     * @param UpdateUserRequest $request
+     * @param string $id
+     * @return JsonResponse
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, string $id): JsonResponse
     {
-        //
+        return $this->userService->updateUser($request, $id);
     }
 
     /**

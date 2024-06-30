@@ -29,7 +29,7 @@ class UserEloquentRepository implements UserRepositoryInterface
     }
 
     /**
-     * ユーザ登録処理
+     * ユーザ登録
      *
      * @param array $user
      */
@@ -47,5 +47,16 @@ class UserEloquentRepository implements UserRepositoryInterface
     public function getUser(int $id): object|null
     {
         return $this->user->find($id);
+    }
+
+    /**
+     * ユーザ更新
+     *
+     * @param integer $id
+     * @param array $user
+     */
+    public function updateUser(int $id, array $user)
+    {
+        $this->user->where(User::ID, $id)->update($user);
     }
 }

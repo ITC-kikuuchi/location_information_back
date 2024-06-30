@@ -27,4 +27,12 @@ interface UserRepositoryInterface
      * @return object|null
      */
     public function getUser(int $id): object|null;
+
+    /**
+     * ユーザ更新
+     *
+     * @param integer $id
+     * @param array $user
+     */
+    public function updateUser(int $id, array $user);
 }

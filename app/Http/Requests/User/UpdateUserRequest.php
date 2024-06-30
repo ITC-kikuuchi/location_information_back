@@ -8,7 +8,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CreateUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     use ResponseTrait;
 
@@ -31,7 +31,7 @@ class CreateUserRequest extends FormRequest
             User::USER_NAME => ['required', 'max:255'],
             User::USER_NAME_KANA => ['required', 'max:255'],
             User::MAIL_ADDRESS => ['required', 'email:filter,dns', 'max:255'],
-            User::PASSWORD => ['required', 'min:8', 'max:255', 'regex:/^[a-zA-Z0-9]+$/'],
+            User::PASSWORD => ['nullable', 'min:8', 'max:255', 'regex:/^[a-zA-Z0-9]+$/'],
             User::IS_ADMIN => ['required'],
             User::DEFAULT_AREA_ID => ['required']
         ];
