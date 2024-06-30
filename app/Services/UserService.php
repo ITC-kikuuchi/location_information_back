@@ -126,13 +126,18 @@ class UserService
      */
     private function createUserData(object $request)
     {
-        return [
+        // ユーザ情報の作成
+        $user = [
             User::USER_NAME => $request[User::USER_NAME],
             User::USER_NAME_KANA => $request[User::USER_NAME_KANA],
             User::MAIL_ADDRESS => $request[User::MAIL_ADDRESS],
-            User::PASSWORD => Hash::make($request[User::PASSWORD]),
             User::IS_ADMIN => $request[User::IS_ADMIN],
             User::DEFAULT_AREA_ID  => $request[User::DEFAULT_AREA_ID]
         ];
+        if ($request[User::PASSWORD]) {
+            // リクエスト値にパスワードが存在した場合
+            $user[User::PASSWORD] = Hash::make($request[User::PASSWORD]);
+        }
+        return $user;
     }
 }
