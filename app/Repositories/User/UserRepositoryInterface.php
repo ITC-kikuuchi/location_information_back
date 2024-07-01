@@ -35,4 +35,11 @@ interface UserRepositoryInterface
      * @param array $user
      */
     public function updateUser(int $id, array $user);
+
+    /**
+     * ユーザ削除
+     *
+     * @param integer $id
+     */
+    public function deleteUser(int $id);
 }

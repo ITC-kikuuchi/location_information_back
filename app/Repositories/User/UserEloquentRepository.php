@@ -59,4 +59,14 @@ class UserEloquentRepository implements UserRepositoryInterface
     {
         $this->user->where(User::ID, $id)->update($user);
     }
+
+    /**
+     * ユーザ削除
+     *
+     * @param integer $id
+     */
+    public function deleteUser(int $id)
+    {
+        $this->user->destroy($id);
+    }
 }
