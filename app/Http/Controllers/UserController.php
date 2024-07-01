@@ -65,10 +65,13 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * ユーザ削除API
+     *
+     * @param integer $id
+     * @return JsonResponse
      */
-    public function destroy(string $id)
+    public function destroy(int $id): JsonResponse
     {
-        //
+        return $this->userService->deleteUser($id);
     }
 }
