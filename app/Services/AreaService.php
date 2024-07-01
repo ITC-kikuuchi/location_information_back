@@ -25,4 +25,32 @@ class AreaService
     public function __construct(protected AreaRepositoryInterface $areaRepositoryInterface)
     {
     }
+
+    /**
+     * エリア一覧取得
+     *
+     * @return JsonResponse
+     */
+    public function getArea(): JsonResponse
+    {
+        // 初期値設定
+        $responseData = [];
+        try {
+            // ユーザ一覧取得
+            $areas = $this->areaRepositoryInterface->getAreas();
+            // レスポンスデータの作成
+            foreach ($areas as $area) {
+                $responseData[Area::AREA_LIST][] = [
+                    Area::ID => $area[Area::ID],
+                    Area::AREA_NAME => $area[Area::AREA_NAME],
+                    Area::IS_DEFAULT_AREA => (bool)$area[Area::IS_DEFAULT_AREA]
+                ];
+            }
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse($responseData);
+    }
 }
