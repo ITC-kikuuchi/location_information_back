@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 class AreaController extends Controller
 {
     /**
-     * AuthController コンストラクタ
-     * AuthService の依存性を注入する
+     * AreaController コンストラクタ
+     * AreaService の依存性を注入する
      *
-     * @param AuthService $authService
+     * @param AreaService $areaService
      */
     public function __construct(protected AreaService $areaService)
     {
