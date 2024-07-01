@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\AreaService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
@@ -18,11 +19,13 @@ class AreaController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * エリア一覧取得API
+     *
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        return $this->areaService->getArea();
     }
 
     /**
