@@ -56,19 +56,22 @@ class UserController extends Controller
      * ユーザ更新API
      *
      * @param UpdateUserRequest $request
-     * @param string $id
+     * @param int $id
      * @return JsonResponse
      */
-    public function update(UpdateUserRequest $request, string $id): JsonResponse
+    public function update(UpdateUserRequest $request, int $id): JsonResponse
     {
         return $this->userService->updateUser($request, $id);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * ユーザ削除API
+     *
+     * @param integer $id
+     * @return JsonResponse
      */
-    public function destroy(string $id)
+    public function destroy(int $id): JsonResponse
     {
-        //
+        return $this->userService->deleteUser($id);
     }
 }

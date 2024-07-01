@@ -147,6 +147,31 @@ class UserService
         return $this->okResponse();
     }
 
+
+    /**
+     * ユーザ削除
+     *
+     * @param integer $id
+     * @return JsonResponse
+     */
+    public function deleteUser(int $id): JsonResponse
+    {
+        try {
+            // id に紐づくユーザのデータ存在チェック
+            $this->dataExistenceCheck($this->userRepositoryInterface->getUser($id));
+            // データベーストランザクションの開始
+            DB::transaction(function () use ($id) {
+                // データ削除処理
+                $this->userRepositoryInterface->deleteUser($id);
+            });
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse();
+    }
+
     /**
      * ユーザ情報作成処理
      *
