@@ -56,10 +56,10 @@ class UserController extends Controller
      * ユーザ更新API
      *
      * @param UpdateUserRequest $request
-     * @param string $id
+     * @param int $id
      * @return JsonResponse
      */
-    public function update(UpdateUserRequest $request, string $id): JsonResponse
+    public function update(UpdateUserRequest $request, int $id): JsonResponse
     {
         return $this->userService->updateUser($request, $id);
     }
