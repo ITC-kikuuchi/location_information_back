@@ -13,7 +13,7 @@ class AreaController extends Controller
      *
      * @param AuthService $authService
      */
-    public function __construct(protected AreaService $authService)
+    public function __construct(protected AreaService $areaService)
     {
     }
 
