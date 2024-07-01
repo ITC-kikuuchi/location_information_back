@@ -157,10 +157,8 @@ class UserService
     public function deleteUser(int $id): JsonResponse
     {
         try {
-            // id に紐づくユーザの取得
-            $userData = $this->userRepositoryInterface->getUser($id);
-            // データ存在チェック
-            $this->dataExistenceCheck($userData);
+            // id に紐づくユーザのデータ存在チェック
+            $this->dataExistenceCheck($this->userRepositoryInterface->getUser($id));
             // データベーストランザクションの開始
             DB::transaction(function () use ($id) {
                 // データ削除処理
