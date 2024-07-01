@@ -163,7 +163,7 @@ class UserService
             $this->dataExistenceCheck($userData);
             // データベーストランザクションの開始
             DB::transaction(function () use ($id) {
-                // データ更新処理
+                // データ削除処理
                 $this->userRepositoryInterface->deleteUser($id);
             });
         } catch (Exception $e) {
