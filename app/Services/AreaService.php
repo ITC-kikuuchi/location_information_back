@@ -31,7 +31,7 @@ class AreaService
      *
      * @return JsonResponse
      */
-    public function getArea(): JsonResponse
+    public function getAreas(): JsonResponse
     {
         // 初期値設定
         $responseData = [];

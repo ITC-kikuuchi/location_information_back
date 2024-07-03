@@ -25,7 +25,7 @@ class AreaController extends Controller
      */
     public function index(): JsonResponse
     {
-        return $this->areaService->getArea();
+        return $this->areaService->getAreas();
     }
 
     /**
