@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Area\CreateAreaRequest;
 use App\Services\AreaService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -29,11 +30,14 @@ class AreaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * エリア登録API
+     *
+     * @param CreateAreaRequest $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(CreateAreaRequest $request): JsonResponse
     {
-        //
+        return $this->areaService->createArea($request);
     }
 
     /**
