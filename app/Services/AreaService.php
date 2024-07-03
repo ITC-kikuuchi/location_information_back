@@ -36,7 +36,7 @@ class AreaService
         // 初期値設定
         $responseData = [];
         try {
-            // ユーザ一覧取得
+            // エリア一覧取得
             $areas = $this->areaRepositoryInterface->getAreas();
             // レスポンスデータの作成
             foreach ($areas as $area) {
