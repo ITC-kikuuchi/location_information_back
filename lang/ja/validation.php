@@ -164,5 +164,7 @@ return [
         'user_name_kana' => 'ユーザ名（かな）',
         'is_admin' => '管理者フラグ',
         'default_area_id' => 'デフォルトエリアID',
+        'area_name' => 'エリア名',
+        'is_default_area' => 'デフォルトエリアフラグ'
     ]
 ];
