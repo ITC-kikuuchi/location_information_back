@@ -58,4 +58,29 @@ class AreaService
         // 200 レスポンス
         return $this->okResponse($responseData);
     }
+
+    /**
+     *
+     * エリア情報作成処理
+     *
+     * @param object $request
+     * @param boolean|null $is_create
+     * @return array $area
+     */
+    function createAreaData(object $request, bool|null $is_create = false): array
+    {
+        // 認証済みユーザの ID の取得
+        $loginUserId = Auth::id();
+        // エリア情報の作成
+        $area = [
+            Area::AREA_NAME => $request[Area::AREA_NAME],
+            Area::IS_DEFAULT_AREA => (bool)$request[Area::IS_DEFAULT_AREA],
+            Area::UPDATED_ID => $loginUserId,
+        ];
+        if ($is_create) {
+            // エリア登録処理の場合
+            $area[Area::CREATED_ID] = $loginUserId;
+        }
+        return $area;
+    }
 }
