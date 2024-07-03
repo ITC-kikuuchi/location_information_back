@@ -6,4 +6,10 @@ namespace App\Repositories\Area;
 
 interface AreaRepositoryInterface
 {
+    /**
+     * エリア一覧取得
+     *
+     * @return object|null
+     */
+    public function getAreas(): object|null;
 }

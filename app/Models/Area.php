@@ -28,4 +28,7 @@ class Area extends Model
         self::CREATED_AT,
         self::UPDATED_AT,
     ];
+
+    // レスポンスで使用する key
+    const AREA_LIST = 'area_list';
 }

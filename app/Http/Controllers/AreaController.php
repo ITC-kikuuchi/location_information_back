@@ -3,26 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Services\AreaService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
     /**
-     * AuthController コンストラクタ
-     * AuthService の依存性を注入する
+     * AreaController コンストラクタ
+     * AreaService の依存性を注入する
      *
-     * @param AuthService $authService
+     * @param AreaService $areaService
      */
-    public function __construct(protected AreaService $authService)
+    public function __construct(protected AreaService $areaService)
     {
     }
 
     /**
-     * Display a listing of the resource.
+     * エリア一覧取得API
+     *
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        return $this->areaService->getAreas();
     }
 
     /**
