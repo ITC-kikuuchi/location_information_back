@@ -60,6 +60,32 @@ class AreaService
     }
 
     /**
+     * エリア登録
+     *
+     * @param CreateAreaRequest $request
+     * @return JsonResponse
+     */
+    public function createArea(CreateAreaRequest $request): JsonResponse
+    {
+        try {
+            // 実行権限チェック
+            $this->ExecutionAuthorityCheck();
+            // エリア情報の作成
+            $area = $this->createAreaData($request, true);
+            // データベーストランザクションの開始
+            DB::transaction(function () use ($area) {
+                // データ登録処理
+                $this->areaRepositoryInterface->createArea($area);
+            });
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse();
+    }
+
+    /**
      *
      * エリア情報作成処理
      *
