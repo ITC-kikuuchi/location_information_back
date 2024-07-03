@@ -30,11 +30,14 @@ class AreaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * エリア登録API
+     *
+     * @param CreateAreaRequest $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(CreateAreaRequest $request): JsonResponse
     {
-        //
+        return $this->areaService->createArea($request);
     }
 
     /**
