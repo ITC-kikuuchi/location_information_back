@@ -27,4 +27,14 @@ class AreaEloquentRepository implements AreaRepositoryInterface
     {
         return $this->area->get();
     }
+
+    /**
+     * エリア登録
+     *
+     * @param array $area
+     */
+    public function createArea(array $area)
+    {
+        $this->area->create($area);
+    }
 }

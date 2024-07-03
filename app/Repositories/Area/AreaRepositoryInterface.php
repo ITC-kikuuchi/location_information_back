@@ -12,4 +12,11 @@ interface AreaRepositoryInterface
      * @return object|null
      */
     public function getAreas(): object|null;
+
+    /**
+     * エリア登録
+     *
+     * @param array $area
+     */
+    public function createArea(array $area);
 }
