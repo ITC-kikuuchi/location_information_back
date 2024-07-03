@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Http\Requests\Area\CreateAreaRequest;
 use App\Models\Area;
 use App\Repositories\Area\AreaRepositoryInterface;
 use App\Traits\ExceptionHandlerTrait;
+use App\Traits\ExecutionAuthorityCheckTrait;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AreaService
 {
     use ResponseTrait;
     use ExceptionHandlerTrait;
+    use ExecutionAuthorityCheckTrait;
 
     /**
      * AreaService コンストラクタ
