@@ -26,4 +26,7 @@ class UserStatus extends Model
         self::CREATED_AT,
         self::UPDATED_AT,
     ];
+
+    // レスポンスで使用する key
+    const USER_STATUS_LIST = 'user_status_list';
 }
