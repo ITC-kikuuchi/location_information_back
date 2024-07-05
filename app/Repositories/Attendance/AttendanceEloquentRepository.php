@@ -17,4 +17,14 @@ class AttendanceEloquentRepository implements AttendanceRepositoryInterface
     public function __construct(protected Attendance $attendance)
     {
     }
+
+    /**
+     * 勤怠状況一覧取得
+     *
+     * @return object|null
+     */
+    public function getAttendances(): object|null
+    {
+        return $this->attendance->get();
+    }
 }
