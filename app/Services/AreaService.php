@@ -147,6 +147,32 @@ class AreaService
     }
 
     /**
+     * エリア削除
+     *
+     * @param integer $id
+     * @return JsonResponse
+     */
+    public function deleteArea(int $id): JsonResponse
+    {
+        try {
+            // 実行権限チェック
+            $this->ExecutionAuthorityCheck();
+            // データ存在チェック
+            $this->dataExistenceCheck($this->areaRepositoryInterface->getArea($id));
+            // データベーストランザクションの開始
+            DB::transaction(function () use ($id) {
+                // データ削除処理
+                $this->areaRepositoryInterface->deleteArea($id);
+            });
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse();
+    }
+
+    /**
      *
      * エリア情報作成処理
      *

@@ -59,4 +59,14 @@ class AreaEloquentRepository implements AreaRepositoryInterface
     {
         $this->area->where(Area::ID, $id)->update($area);
     }
+
+    /**
+     * エリア削除
+     *
+     * @param int $id
+     */
+    public function deleteArea(int $id)
+    {
+        $this->area->destroy($id);
+    }
 }
