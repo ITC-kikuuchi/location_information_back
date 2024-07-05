@@ -48,4 +48,15 @@ class AreaEloquentRepository implements AreaRepositoryInterface
     {
         return $this->area->find($id);
     }
+
+    /**
+     * エリア更新
+     *
+     * @param int $id
+     * @param array $area
+     */
+    public function updateArea(int $id, array $area)
+    {
+        $this->area->where(Area::ID, $id)->update($area);
+    }
 }
