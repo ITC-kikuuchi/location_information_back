@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Http\Requests\Area\CreateAreaRequest;
+use App\Http\Requests\Area\UpdateAreaRequest;
 use App\Models\Area;
 use App\Repositories\Area\AreaRepositoryInterface;
 use App\Traits\DataExistenceCheckTrait;
