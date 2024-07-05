@@ -25,4 +25,31 @@ class AttendanceService
     public function __construct(protected AttendanceRepositoryInterface $attendanceRepositoryInterface)
     {
     }
+
+    /**
+     * 勤怠状況一覧取得
+     *
+     * @return JsonResponse
+     */
+    public function getAttendances(): JsonResponse
+    {
+        // 初期値設定
+        $responseData = [];
+        try {
+            // 勤怠一覧取得
+            $attendances = $this->attendanceRepositoryInterface->getAttendances();
+            // レスポンスデータの作成
+            foreach ($attendances as $attendance) {
+                $responseData[Attendance::ATTENDANCE_LIST][] = [
+                    Attendance::ID => $attendance[Attendance::ID],
+                    Attendance::ATTENDANCE_STATUS => $attendance[Attendance::ATTENDANCE_STATUS]
+                ];
+            }
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse($responseData);
+    }
 }
