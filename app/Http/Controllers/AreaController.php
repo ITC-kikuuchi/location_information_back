@@ -64,10 +64,13 @@ class AreaController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * エリア削除API
+     *
+     * @param string $id
+     * @return JsonResponse
      */
-    public function destroy(string $id)
+    public function destroy(string $id): JsonResponse
     {
-        //
+        return $this->areaService->deleteArea($id);
     }
 }
