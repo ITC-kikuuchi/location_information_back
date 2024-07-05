@@ -52,11 +52,15 @@ class AreaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * エリア更新API
+     *
+     * @param UpdateAreaRequest $request
+     * @param integer $id
+     * @return JsonResponse
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateAreaRequest $request, int $id): JsonResponse
     {
-        //
+        return $this->areaService->updateArea($id, $request);
     }
 
     /**
