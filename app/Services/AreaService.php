@@ -87,6 +87,37 @@ class AreaService
         return $this->okResponse();
     }
 
+
+    /**
+     * エリア詳細取得
+     *
+     * @param integer $id
+     * @return JsonResponse
+     */
+    public function getDetailArea(int $id): JsonResponse
+    {
+        $responseData = [];
+        try {
+            // 実行権限チェック
+            $this->ExecutionAuthorityCheck();
+            // エリア詳細取得
+            $area = $this->areaRepositoryInterface->getArea($id);
+            // データ存在チェック
+            $this->dataExistenceCheck($area);
+            // レスポンスデータの作成
+            $responseData = [
+                Area::ID => $area[Area::ID],
+                Area::AREA_NAME => $area[Area::AREA_NAME],
+                Area::IS_DEFAULT_AREA => $area[Area::IS_DEFAULT_AREA],
+            ];
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse($responseData);
+    }
+
     /**
      *
      * エリア情報作成処理
