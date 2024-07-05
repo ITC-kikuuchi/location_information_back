@@ -16,4 +16,13 @@ class AttendanceService
     use ResponseTrait;
     use ExceptionHandlerTrait;
 
+    /**
+     * AttendanceService コンストラクタ
+     * AttendanceRepositoryInterface の依存性を注入する
+     *
+     * @param AttendanceRepositoryInterface $attendanceRepositoryInterface
+     */
+    public function __construct(protected AttendanceRepositoryInterface $attendanceRepositoryInterface)
+    {
+    }
 }
