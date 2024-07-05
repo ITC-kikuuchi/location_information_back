@@ -25,4 +25,31 @@ class UserStatusService
     public function __construct(protected UserStatusRepositoryInterface $userStatusRepositoryInterface)
     {
     }
+
+    /**
+     * ユーザステータス一覧取得
+     *
+     * @return JsonResponse
+     */
+    public function getUserStatuses(): JsonResponse
+    {
+        // 初期値設定
+        $responseData = [];
+        try {
+            // ユーザステータス一覧取得
+            $userStatuses = $this->userStatusRepositoryInterface->getUserStatuses();
+            // レスポンスデータの作成
+            foreach ($userStatuses as $userStatus) {
+                $responseData[UserStatus::USER_STATUS_LIST][] = [
+                    UserStatus::ID => $userStatus[UserStatus::ID],
+                    UserStatus::USER_STATUS => $userStatus[UserStatus::USER_STATUS]
+                ];
+            }
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse($responseData);
+    }
 }
