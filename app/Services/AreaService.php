@@ -120,6 +120,33 @@ class AreaService
     }
 
     /**
+     * エリア更新
+     *
+     * @param integer $id
+     * @param UpdateAreaRequest $request
+     * @return JsonResponse
+     */
+    public function updateArea(int $id, UpdateAreaRequest $request): JsonResponse
+    {
+        try {
+            // 実行権限チェック
+            $this->ExecutionAuthorityCheck();
+            // エリア情報の作成
+            $area = $this->createAreaData($request, true);
+            // データベーストランザクションの開始
+            DB::transaction(function () use ($id, $area) {
+                // データ更新処理
+                $this->areaRepositoryInterface->updateArea($id, $area);
+            });
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse();
+    }
+
+    /**
      *
      * エリア情報作成処理
      *
