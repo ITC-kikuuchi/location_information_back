@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Http\Requests\Area\CreateAreaRequest;
+use App\Http\Requests\Area\UpdateAreaRequest;
 use App\Models\Area;
 use App\Repositories\Area\AreaRepositoryInterface;
 use App\Traits\DataExistenceCheckTrait;
@@ -116,6 +117,33 @@ class AreaService
         }
         // 200 レスポンス
         return $this->okResponse($responseData);
+    }
+
+    /**
+     * エリア更新
+     *
+     * @param integer $id
+     * @param UpdateAreaRequest $request
+     * @return JsonResponse
+     */
+    public function updateArea(int $id, UpdateAreaRequest $request): JsonResponse
+    {
+        try {
+            // 実行権限チェック
+            $this->ExecutionAuthorityCheck();
+            // エリア情報の作成
+            $area = $this->createAreaData($request, true);
+            // データベーストランザクションの開始
+            DB::transaction(function () use ($id, $area) {
+                // データ更新処理
+                $this->areaRepositoryInterface->updateArea($id, $area);
+            });
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse();
     }
 
     /**

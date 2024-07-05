@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Area\CreateAreaRequest;
+use App\Http\Requests\Area\UpdateAreaRequest;
 use App\Services\AreaService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
@@ -52,11 +52,15 @@ class AreaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * エリア更新API
+     *
+     * @param UpdateAreaRequest $request
+     * @param integer $id
+     * @return JsonResponse
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateAreaRequest $request, int $id): JsonResponse
     {
-        //
+        return $this->areaService->updateArea($id, $request);
     }
 
     /**
