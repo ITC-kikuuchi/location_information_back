@@ -13,10 +13,10 @@ trait ExecutionAuthorityCheckTrait
     /**
      * 実行権限チェック
      *
-     * @param int|null $userId
+     * @param int $userId
      * @return void
      */
-    public function ExecutionAuthorityCheck(int|null $userId = null)
+    public function ExecutionAuthorityCheck(int $userId = null)
     {
         // 認証済みユーザの取得
         $user = Auth::user();
