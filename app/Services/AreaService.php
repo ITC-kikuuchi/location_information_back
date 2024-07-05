@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Http\Requests\Area\CreateAreaRequest;
 use App\Models\Area;
 use App\Repositories\Area\AreaRepositoryInterface;
+use App\Traits\DataExistenceCheckTrait;
 use App\Traits\ExceptionHandlerTrait;
 use App\Traits\ExecutionAuthorityCheckTrait;
 use App\Traits\ResponseTrait;
@@ -20,6 +21,7 @@ class AreaService
     use ResponseTrait;
     use ExceptionHandlerTrait;
     use ExecutionAuthorityCheckTrait;
+    use DataExistenceCheckTrait;
 
     /**
      * AreaService コンストラクタ
@@ -83,6 +85,37 @@ class AreaService
         }
         // 200 レスポンス
         return $this->okResponse();
+    }
+
+
+    /**
+     * エリア詳細取得
+     *
+     * @param integer $id
+     * @return JsonResponse
+     */
+    public function getDetailArea(int $id): JsonResponse
+    {
+        $responseData = [];
+        try {
+            // 実行権限チェック
+            $this->ExecutionAuthorityCheck();
+            // エリア詳細取得
+            $area = $this->areaRepositoryInterface->getArea($id);
+            // データ存在チェック
+            $this->dataExistenceCheck($area);
+            // レスポンスデータの作成
+            $responseData = [
+                Area::ID => $area[Area::ID],
+                Area::AREA_NAME => $area[Area::AREA_NAME],
+                Area::IS_DEFAULT_AREA => $area[Area::IS_DEFAULT_AREA],
+            ];
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse($responseData);
     }
 
     /**

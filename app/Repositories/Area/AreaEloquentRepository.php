@@ -37,4 +37,15 @@ class AreaEloquentRepository implements AreaRepositoryInterface
     {
         $this->area->create($area);
     }
+
+    /**
+     * エリア詳細取得
+     *
+     * @param integer $id
+     * @return object|null
+     */
+    public function getArea(int $id): object|null
+    {
+        return $this->area->find($id);
+    }
 }
