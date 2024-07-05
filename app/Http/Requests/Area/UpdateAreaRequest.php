@@ -25,7 +25,18 @@ class UpdateAreaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            Area::AREA_NAME => ['required', 'max:255'],
+            Area::IS_DEFAULT_AREA => ['required']
         ];
+    }
+
+    /**
+     * エラーハンドリング
+     *
+     * @param Validator $validator
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException($this->unprocessableEntityResponse($validator->errors()->toArray()));
     }
 }
