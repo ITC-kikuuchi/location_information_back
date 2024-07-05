@@ -35,4 +35,11 @@ interface AreaRepositoryInterface
      * @param array $area
      */
     public function updateArea(int $id, array $area);
+
+    /**
+     * エリア削除
+     *
+     * @param int $id
+     */
+    public function deleteArea(int $id);
 }
