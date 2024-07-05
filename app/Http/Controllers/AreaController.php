@@ -66,10 +66,10 @@ class AreaController extends Controller
     /**
      * エリア削除API
      *
-     * @param string $id
+     * @param int $id
      * @return JsonResponse
      */
-    public function destroy(string $id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         return $this->areaService->deleteArea($id);
     }
