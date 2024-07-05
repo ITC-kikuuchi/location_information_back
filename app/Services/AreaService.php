@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Http\Requests\Area\CreateAreaRequest;
 use App\Models\Area;
 use App\Repositories\Area\AreaRepositoryInterface;
+use App\Traits\DataExistenceCheckTrait;
 use App\Traits\ExceptionHandlerTrait;
 use App\Traits\ExecutionAuthorityCheckTrait;
 use App\Traits\ResponseTrait;
@@ -20,6 +21,7 @@ class AreaService
     use ResponseTrait;
     use ExceptionHandlerTrait;
     use ExecutionAuthorityCheckTrait;
+    use DataExistenceCheckTrait;
 
     /**
      * AreaService コンストラクタ
