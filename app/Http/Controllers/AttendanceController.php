@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\AttendanceService;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class AttendanceController extends Controller
 {
@@ -18,10 +18,12 @@ class AttendanceController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 勤怠状況一覧取得API
+     *
+     * @return JsonResponse
      */
-    public function __invoke()
+    public function __invoke(): JsonResponse
     {
-        //
+        return $this->attendanceService->getAttendances();
     }
 }

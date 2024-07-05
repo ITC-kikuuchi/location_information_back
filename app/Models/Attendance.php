@@ -26,4 +26,7 @@ class Attendance extends Model
         self::CREATED_AT,
         self::UPDATED_AT,
     ];
+
+    // レスポンスで使用する key
+    const ATTENDANCE_LIST = 'attendance_list';
 }
