@@ -16,4 +16,13 @@ class UserStatusService
     use ResponseTrait;
     use ExceptionHandlerTrait;
 
+    /**
+     * UserStatusService コンストラクタ
+     * UserStatusRepositoryInterface の依存性を注入する
+     *
+     * @param UserStatusRepositoryInterface $userStatusRepositoryInterface
+     */
+    public function __construct(protected UserStatusRepositoryInterface $userStatusRepositoryInterface)
+    {
+    }
 }
