@@ -17,4 +17,14 @@ class UserStatusEloquentRepository implements UserStatusRepositoryInterface
     public function __construct(protected UserStatus $userStatus)
     {
     }
+
+    /**
+     * ユーザステータス一覧取得
+     *
+     * @return object|null
+     */
+    public function getUserStatuses(): object|null
+    {
+        return $this->userStatus->get();
+    }
 }
