@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Area;
 
+use App\Models\Area;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdateAreaRequest extends FormRequest
 {
