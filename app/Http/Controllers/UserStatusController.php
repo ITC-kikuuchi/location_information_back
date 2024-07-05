@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\UserStatusService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserStatusController extends Controller
@@ -18,10 +19,12 @@ class UserStatusController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * ユーザステータス一覧取得API
+     *
+     * @return JsonResponse
      */
-    public function __invoke()
+    public function __invoke(): JsonResponse
     {
-        //
+        return $this->userStatusService->getUserStatuses();
     }
 }
