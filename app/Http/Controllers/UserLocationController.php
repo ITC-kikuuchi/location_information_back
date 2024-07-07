@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\UserLocationService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserLocationController extends Controller
@@ -18,11 +19,13 @@ class UserLocationController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * ユーザ位置情報一覧取得API
+     *
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        return $this->userLocationService->getUserLocations();
     }
 
     /**

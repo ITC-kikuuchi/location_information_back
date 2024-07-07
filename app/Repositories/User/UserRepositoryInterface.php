@@ -42,4 +42,11 @@ interface UserRepositoryInterface
      * @param integer $id
      */
     public function deleteUser(int $id);
+
+    /**
+     * ユーザ位置情報一覧取得
+     *
+     * @return object|null
+     */
+    public function getUsersLocations(): object|null;
 }

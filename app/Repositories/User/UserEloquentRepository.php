@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Repositories\User;
 
+use App\Models\Area;
+use App\Models\Attendance;
 use App\Models\User;
+use App\Models\UserStatus;
 
 class UserEloquentRepository implements UserRepositoryInterface
 {
@@ -68,5 +71,25 @@ class UserEloquentRepository implements UserRepositoryInterface
     public function deleteUser(int $id)
     {
         $this->user->destroy($id);
+    }
+
+    /**
+     * ユーザ位置情報一覧取得
+     *
+     * @return object|null
+     */
+    public function getUsersLocations(): object|null
+    {
+        return $this->user
+            ->select(
+                User::TABLE . '.*',
+                Area::TABLE . '.' . Area::AREA_NAME,
+                Attendance::TABLE . '.' . Attendance::ATTENDANCE_STATUS,
+                UserStatus::TABLE . '.' . UserStatus::USER_STATUS
+            )
+            ->leftJoin(Area::TABLE, User::AREA_ID, '=', Area::TABLE . '.' . Area::ID)
+            ->leftJoin(Attendance::TABLE, User::ATTENDANCE_ID, '=', Attendance::TABLE . '.' . Attendance::ID)
+            ->leftJoin(UserStatus::TABLE, User::USER_STATUS_ID, '=', UserStatus::TABLE . '.' . UserStatus::ID)
+            ->get();
     }
 }
