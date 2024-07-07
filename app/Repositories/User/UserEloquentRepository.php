@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Repositories\User;
 
+use App\Models\Area;
+use App\Models\Attendance;
 use App\Models\User;
+use App\Models\UserStatus;
 
 class UserEloquentRepository implements UserRepositoryInterface
 {
