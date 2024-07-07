@@ -28,4 +28,38 @@ class UserLocationService
     public function __construct(protected UserRepositoryInterface $userRepositoryInterface)
     {
     }
+
+    /**
+     * ユーザ位置情報一覧取得
+     *
+     * @return JsonResponse
+     */
+    public function getUserLocations(): JsonResponse
+    {
+        // 初期値設定
+        $responseData = [];
+        try {
+            // ユーザ一覧取得
+            $users = $this->userRepositoryInterface->getUsersLocations();
+            // レスポンスデータの作成
+            foreach($users as $user) {
+                $responseData[User::USER_LIST][] = [
+                    User::ID => $user[User::ID],
+                    User::USER_NAME => $user[User::USER_NAME],
+                    User::USER_NAME_KANA=> $user[User::USER_NAME_KANA],
+                    User::AREA_ID => $user[User::AREA_ID],
+                    Area::AREA_NAME => $user[Area::AREA_NAME],
+                    User::ATTENDANCE_ID => $user[User::ATTENDANCE_ID],
+                    Attendance::ATTENDANCE_STATUS => $user[Attendance::ATTENDANCE_STATUS],
+                    User::USER_STATUS_ID => $user[User::USER_STATUS_ID],
+                    UserStatus::USER_STATUS => $user[UserStatus::USER_STATUS],
+                ];
+            }
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse($responseData);
+    }
 }
