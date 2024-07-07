@@ -18,4 +18,14 @@ class UserLocationService
 {
     use ResponseTrait;
     use ExceptionHandlerTrait;
+
+    /**
+     * UserLocationService コンストラクタ
+     * UserRepositoryInterface の依存性を注入する
+     *
+     * @param UserRepositoryInterface $userRepositoryInterface
+     */
+    public function __construct(protected UserRepositoryInterface $userRepositoryInterface)
+    {
+    }
 }
