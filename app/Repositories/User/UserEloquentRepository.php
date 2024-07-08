@@ -92,4 +92,25 @@ class UserEloquentRepository implements UserRepositoryInterface
             ->leftJoin(UserStatus::TABLE, User::USER_STATUS_ID, '=', UserStatus::TABLE . '.' . UserStatus::ID)
             ->get();
     }
+
+    /**
+     * ユーザ位置情報詳細取得
+     *
+     * @param int $id
+     * @return object|null
+     */
+    public function getDetailUserLocation(int $id): object|null
+    {
+        return $this->user->select(
+            User::TABLE . '.' . User::ID,
+            User::TABLE . '.' . User::USER_NAME,
+            Area::TABLE . '.' . Area::AREA_NAME,
+            Attendance::TABLE . '.' . Attendance::ATTENDANCE_STATUS,
+            UserStatus::TABLE . '.' . UserStatus::USER_STATUS
+        )
+            ->leftJoin(Area::TABLE, User::AREA_ID, '=', Area::TABLE . '.' . Area::ID)
+            ->leftJoin(Attendance::TABLE, User::ATTENDANCE_ID, '=', Attendance::TABLE . '.' . Attendance::ID)
+            ->leftJoin(UserStatus::TABLE, User::USER_STATUS_ID, '=', UserStatus::TABLE . '.' . UserStatus::ID)
+            ->find($id);
+    }
 }
