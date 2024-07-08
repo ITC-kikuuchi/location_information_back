@@ -29,11 +29,14 @@ class UserLocationController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * ユーザ位置情報詳細取得API
+     *
+     * @param integer $id
+     * @return JsonResponse
      */
-    public function show(string $id)
+    public function show(int $id): JsonResponse
     {
-        //
+        return $this->userLocationService->getDetailUserLocation($id);
     }
 
     /**
