@@ -49,4 +49,12 @@ interface UserRepositoryInterface
      * @return object|null
      */
     public function getUsersLocations(): object|null;
+
+    /**
+     * ユーザ位置情報詳細取得
+     *
+     * @param int $id
+     * @return object|null
+     */
+    public function getDetailUserLocation(int $id): object|null;
 }
