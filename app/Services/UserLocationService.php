@@ -9,6 +9,7 @@ use App\Models\Attendance;
 use App\Models\User;
 use App\Models\UserStatus;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Traits\DataExistenceCheckTrait;
 use App\Traits\ExceptionHandlerTrait;
 use App\Traits\ResponseTrait;
 use Exception;
@@ -18,6 +19,7 @@ class UserLocationService
 {
     use ResponseTrait;
     use ExceptionHandlerTrait;
+    use DataExistenceCheckTrait;
 
     /**
      * UserLocationService コンストラクタ
