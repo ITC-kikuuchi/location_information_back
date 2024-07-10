@@ -27,4 +27,21 @@ enum SettingLocation: int
             self::FIVE->value => 6, // なし
         };
     }
+
+    /**
+     * 勤怠IDに紐づくステータスの返却
+     *
+     * @param integer $attendance_id
+     * @return integer
+     */
+    public static function getUserStatusId(int $attendance_id): int
+    {
+        return match ($attendance_id) {
+            self::ONE->value => 1, // 自席
+            self::TWO->value => 1, // 自席
+            self::THREE->value => 5, // なし
+            self::FOUR->value => 4, // 外出中
+            self::FIVE->value => 5, // なし
+        };
+    }
 }
