@@ -40,10 +40,14 @@ class UserLocationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * ユーザ位置情報更新API
+     *
+     * @param Request $request
+     * @param integer $id
+     * @return JsonResponse
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id): JsonResponse
     {
-        //
+        return $this->userLocationService->updateUserLocation($id, $request);
     }
 }
