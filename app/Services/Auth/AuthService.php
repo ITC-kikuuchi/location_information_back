@@ -12,6 +12,7 @@ use App\Traits\ExceptionHandlerTrait;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService
@@ -40,15 +41,11 @@ class AuthService
         // 初期値設定
         $responseData = [];
         try {
-            // リクエスト値の抽出
-            $credentials = $request->only([User::MAIL_ADDRESS, User::PASSWORD]);
-            if (Auth::attempt($credentials)) {
+            if (Auth::attempt($request->only([User::MAIL_ADDRESS, User::PASSWORD]))) {
                 // ユーザ認証に成功した場合
                 $request->session()->regenerate();
-                // 認証ユーザの ID に紐づくユーザ情報の取得
-                $loginUser = $this->userRepositoryInterface->getUser(Auth::id());
                 // レスポンスデータの作成
-                $responseData = $this->userResponse($loginUser);
+                $responseData = $this->userResponse(Auth::user());
             } else {
                 // ユーザ認証に失敗した場合
                 throw new UnauthorizedException();
@@ -71,8 +68,8 @@ class AuthService
         // 初期値設定
         $responseData = [];
         try {
-            // 認証ユーザの ID に紐づくユーザ情報の取得
-            $loginUser = $this->userRepositoryInterface->getUser(Auth::id());
+            // 認証ユーザ情報の取得
+            $loginUser = Auth::user();
             if (!$loginUser) {
                 // ID に紐づくユーザ情報が存在しない場合
                 throw new UnauthorizedException();
@@ -90,13 +87,18 @@ class AuthService
     /**
      * ログアウト処理
      *
+     * @param Request $request
      * @return JsonResponse
      */
-    public function logout(): JsonResponse
+    public function logout(Request $request): JsonResponse
     {
         try {
             // ログアウト処理
             Auth::logout();
+            // セッション無効化
+            $request->session()->invalidate();
+            // トークン再生成
+            $request->session()->regenerateToken();
         } catch (Exception $e) {
             // エラーハンドリング
             return $this->exceptionHandler($e);
