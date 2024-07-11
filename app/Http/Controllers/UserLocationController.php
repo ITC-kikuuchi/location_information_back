@@ -43,7 +43,7 @@ class UserLocationController extends Controller
     /**
      * ユーザ位置情報更新API
      *
-     * @param Request $request
+     * @param UpdateUserLocationRequest $request
      * @param integer $id
      * @return JsonResponse
      */

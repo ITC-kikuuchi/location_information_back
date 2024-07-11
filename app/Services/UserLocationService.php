@@ -104,7 +104,7 @@ class UserLocationService
      * ユーザ位置情報更新処理
      *
      * @param integer $id
-     * @param Request $request
+     * @param UpdateUserLocationRequest $request
      * @return JsonResponse
      */
     public function updateUserLocation(int $id, UpdateUserLocationRequest $request): JsonResponse
