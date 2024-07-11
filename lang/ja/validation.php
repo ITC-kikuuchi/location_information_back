@@ -165,6 +165,9 @@ return [
         'is_admin' => '管理者フラグ',
         'default_area_id' => 'デフォルトエリアID',
         'area_name' => 'エリア名',
-        'is_default_area' => 'デフォルトエリアフラグ'
+        'is_default_area' => 'デフォルトエリアフラグ',
+        'area_id' => 'エリアID',
+        'attendance_id' => '勤怠ID',
+        'user_status_id' => 'ユーザステータスID',
     ]
 ];
