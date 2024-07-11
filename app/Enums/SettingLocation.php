@@ -2,8 +2,8 @@
 
 namespace App\Enums;
 
-use App\Models\Area;
-use App\Models\UserStatus;
+use App\Enums\Area;
+use App\Enums\UserStatus;
 
 enum SettingLocation: int
 {
@@ -24,10 +24,10 @@ enum SettingLocation: int
     {
         return match ($attendance_id) {
             self::ONE->value => $default_area_id,
-            self::TWO->value => Area::HOME,
-            self::THREE->value => Area::NONE,
-            self::FOUR->value => Area::NONE,
-            self::FIVE->value => Area::NONE,
+            self::TWO->value => Area::HOME->value,
+            self::THREE->value => Area::NONE->value,
+            self::FOUR->value => Area::NONE->value,
+            self::FIVE->value => Area::NONE->value,
         };
     }
 
@@ -40,11 +40,11 @@ enum SettingLocation: int
     public static function getUserStatusId(int $attendance_id): int
     {
         return match ($attendance_id) {
-            self::ONE->value => UserStatus::OWN_SEAT,
-            self::TWO->value => UserStatus::OWN_SEAT,
-            self::THREE->value => UserStatus::NONE,
-            self::FOUR->value => UserStatus::OUTING,
-            self::FIVE->value => UserStatus::NONE,
+            self::ONE->value => UserStatus::OWN_SEAT->value,
+            self::TWO->value => UserStatus::OWN_SEAT->value,
+            self::THREE->value => UserStatus::NONE->value,
+            self::FOUR->value => UserStatus::OUTING->value,
+            self::FIVE->value => UserStatus::NONE->value,
         };
     }
 }
