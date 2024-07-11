@@ -44,10 +44,11 @@ class AuthController extends Controller
     /**
      * ログアウトAPI
      *
+     * @param Request $request
      * @return JsonResponse
      */
-    public function logout(): JsonResponse
+    public function logout(Request $request): JsonResponse
     {
-        return $this->authService->logout();
+        return $this->authService->logout($request);
     }
 }
