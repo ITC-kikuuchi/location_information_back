@@ -32,7 +32,19 @@ class UpdateUserLocationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            User::AREA_ID => [Rule::enum(Area::class)->except([Area::NONE])],
+            User::ATTENDANCE_ID => [Rule::enum(Attendance::class)->except([Attendance::NONE])],
+            User::USER_STATUS_ID => [Rule::enum(UserStatus::class)->except([UserStatus::NONE])],
         ];
+    }
+
+    /**
+     * エラーハンドリング
+     *
+     * @param Validator $validator
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException($this->unprocessableEntityResponse($validator->errors()->toArray()));
     }
 }
