@@ -31,16 +31,4 @@ class Area extends Model
 
     // レスポンスで使用する key
     const AREA_LIST = 'area_list';
-    // 2F開発部屋
-    const SECOND_FLOOR_DEVELOPMENT_ROOM = 1;
-    // 2F会議室
-    const SECOND_FLOOR_CONFERENCE_ROOM = 2;
-    // 1F開発部屋
-    const FIRST_FLOOR_DEVELOPMENT_ROOM = 3;
-    // 1F会議室
-    const FIRST_FLOOR_CONFERENCE_ROOM = 4;
-    // 自宅
-    const HOME = 5;
-    // なし
-    const NONE = 6;
 }
