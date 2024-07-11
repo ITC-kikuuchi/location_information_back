@@ -68,8 +68,8 @@ class AuthService
         // 初期値設定
         $responseData = [];
         try {
-            // 認証ユーザの ID に紐づくユーザ情報の取得
-            $loginUser = $this->userRepositoryInterface->getUser(Auth::id());
+            // 認証ユーザ情報の取得
+            $loginUser = Auth::user();
             if (!$loginUser) {
                 // ID に紐づくユーザ情報が存在しない場合
                 throw new UnauthorizedException();
