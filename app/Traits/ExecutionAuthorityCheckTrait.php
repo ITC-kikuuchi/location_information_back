@@ -35,7 +35,7 @@ trait ExecutionAuthorityCheckTrait
      */
     public function IdCheck(int $userId)
     {
-        if ($userId !== Auth::Id()) {
+        if ($userId != Auth::Id()) {
             // リクエスト値と　　ログインユーザの id が一致しない場合
             throw new ForbiddenException();
         }
