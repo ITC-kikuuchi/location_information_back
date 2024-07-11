@@ -87,13 +87,18 @@ class AuthService
     /**
      * ログアウト処理
      *
+     * @param Request $request
      * @return JsonResponse
      */
-    public function logout(): JsonResponse
+    public function logout(Request $request): JsonResponse
     {
         try {
             // ログアウト処理
             Auth::logout();
+            // セッション無効化
+            $request->session()->invalidate();
+            // トークン再生成
+            $request->session()->regenerateToken();
         } catch (Exception $e) {
             // エラーハンドリング
             return $this->exceptionHandler($e);
