@@ -2,6 +2,9 @@
 
 namespace App\Enums;
 
+use App\Models\Area;
+use App\Models\UserStatus;
+
 enum SettingLocation: int
 {
     case ONE = 1;
