@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Enums\SettingLocation;
-use App\Exceptions\ForbiddenException;
 use App\Models\Area;
 use App\Models\Attendance;
 use App\Models\User;
@@ -18,7 +17,6 @@ use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserLocationService
