@@ -23,11 +23,11 @@ enum SettingLocation: int
     public static function getAreaId(int $attendance_id, int $default_area_id): int
     {
         return match ($attendance_id) {
-            self::ONE->value => $default_area_id, // デフォルトエリア
-            self::TWO->value => 5, // 自宅
-            self::THREE->value => 6, // なし
-            self::FOUR->value => 6, // なし
-            self::FIVE->value => 6, // なし
+            self::ONE->value => $default_area_id,
+            self::TWO->value => Area::HOME,
+            self::THREE->value => Area::NONE,
+            self::FOUR->value => Area::NONE,
+            self::FIVE->value => Area::NONE,
         };
     }
 
@@ -40,11 +40,11 @@ enum SettingLocation: int
     public static function getUserStatusId(int $attendance_id): int
     {
         return match ($attendance_id) {
-            self::ONE->value => 1, // 自席
-            self::TWO->value => 1, // 自席
-            self::THREE->value => 5, // なし
-            self::FOUR->value => 4, // 外出中
-            self::FIVE->value => 5, // なし
+            self::ONE->value => UserStatus::OWN_SEAT,
+            self::TWO->value => UserStatus::OWN_SEAT,
+            self::THREE->value => UserStatus::NONE,
+            self::FOUR->value => UserStatus::OUTING,
+            self::FIVE->value => UserStatus::NONE,
         };
     }
 }
