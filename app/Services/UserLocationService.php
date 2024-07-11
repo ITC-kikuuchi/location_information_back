@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Enums\SettingLocation;
+use App\Http\Requests\UserLocation\UpdateUserLocationRequest;
 use App\Models\Area;
 use App\Models\Attendance;
 use App\Models\User;
@@ -11,15 +13,19 @@ use App\Models\UserStatus;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Traits\DataExistenceCheckTrait;
 use App\Traits\ExceptionHandlerTrait;
+use App\Traits\ExecutionAuthorityCheckTrait;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserLocationService
 {
     use ResponseTrait;
     use ExceptionHandlerTrait;
     use DataExistenceCheckTrait;
+    use ExecutionAuthorityCheckTrait;
 
     /**
      * UserLocationService コンストラクタ
@@ -92,5 +98,49 @@ class UserLocationService
         }
         // 200 レスポンス
         return $this->okResponse($responseData);
+    }
+
+    /**
+     * ユーザ位置情報更新処理
+     *
+     * @param integer $id
+     * @param UpdateUserLocationRequest $request
+     * @return JsonResponse
+     */
+    public function updateUserLocation(int $id, UpdateUserLocationRequest $request): JsonResponse
+    {
+        try {
+            // 実行権限チェック
+            $this->IdCheck($id);
+            // id に紐づくユーザの取得
+            $user = $this->userRepositoryInterface->getUser($id);
+            // データ存在チェック
+            $this->dataExistenceCheck($user);
+            // 更新データの作成
+            if ($request[User::ATTENDANCE_ID]) {
+                // 勤怠ID が存在した場合
+                $userLocation = [
+                    User::ATTENDANCE_ID => $request[User::ATTENDANCE_ID],
+                    User::AREA_ID => SettingLocation::getAreaId($request[User::ATTENDANCE_ID], $user[User::DEFAULT_AREA_ID]),
+                    User::USER_STATUS_ID => SettingLocation::getUserStatusId($request[User::ATTENDANCE_ID])
+                ];
+            } else {
+                // エリアID または ユーザステータスID が存在した場合
+                $userLocation = [
+                    User::AREA_ID => $request[User::AREA_ID] ?? $user[User::AREA_ID],
+                    User::USER_STATUS_ID => $request[User::USER_STATUS_ID] ?? $user[User::USER_STATUS_ID],
+                ];
+            }
+            // データベーストランザクションの開始
+            DB::transaction(function () use ($id, $userLocation) {
+                // データ更新処理
+                $this->userRepositoryInterface->updateUser($id, $userLocation);
+            });
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return $this->exceptionHandler($e);
+        }
+        // 200 レスポンス
+        return $this->okResponse();
     }
 }

@@ -11,12 +11,11 @@ use Illuminate\Support\Facades\Auth;
 trait ExecutionAuthorityCheckTrait
 {
     /**
-     * 実行権限チェック
+     * 管理者権限及びIDチェック
      *
      * @param int $userId
-     * @return void
      */
-    public function ExecutionAuthorityCheck(int $userId = null)
+    public function AdminAuthorityAndIdCheck(int $userId = null)
     {
         // 認証済みユーザの取得
         $user = Auth::user();
@@ -26,6 +25,19 @@ trait ExecutionAuthorityCheckTrait
                 // ユーザID が存在しない、またはログインユーザのID と一致しない場合
                 throw new ForbiddenException();
             }
+        }
+    }
+
+    /**
+     * IDチェック
+     *
+     * @param integer $userId
+     */
+    public function IdCheck(int $userId)
+    {
+        if ($userId != Auth::Id()) {
+            // リクエスト値と　　ログインユーザの id が一致しない場合
+            throw new ForbiddenException();
         }
     }
 }
