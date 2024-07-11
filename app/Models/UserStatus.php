@@ -29,4 +29,14 @@ class UserStatus extends Model
 
     // レスポンスで使用する key
     const USER_STATUS_LIST = 'user_status_list';
+    // 自席
+    const OWN_SEAT = 1;
+    // 離席
+    const LEAVE_SEAT = 2;
+    // 会議中
+    const IN_A_MEETING = 3;
+    // 外出中
+    const OUTING = 4;
+    // なし
+    const NONE = 5;
 }
