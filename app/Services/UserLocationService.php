@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Enums\SettingLocation;
+use App\Http\Requests\UserLocation\UpdateUserLocationRequest;
 use App\Models\Area;
 use App\Models\Attendance;
 use App\Models\User;
@@ -106,7 +107,7 @@ class UserLocationService
      * @param Request $request
      * @return JsonResponse
      */
-    public function updateUserLocation(int $id, Request $request): JsonResponse
+    public function updateUserLocation(int $id, UpdateUserLocationRequest $request): JsonResponse
     {
         try {
             // 実行権限チェック
