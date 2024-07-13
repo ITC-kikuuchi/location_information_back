@@ -192,21 +192,33 @@ class UserService
      * ユーザ情報作成処理
      *
      * @param object $request
+     * @param boolean $isCreate
+     * @param integer|null $id
      * @return array
      */
-    private function createUserData(object $request)
+    private function createUserData(object $request, bool $isCreate, int $id = null): array
     {
+        // 認証ユーザの取得
+        $loginUser = Auth::user();
         // ユーザ情報の作成
         $user = [
             User::USER_NAME => $request[User::USER_NAME],
             User::USER_NAME_KANA => $request[User::USER_NAME_KANA],
             User::MAIL_ADDRESS => $request[User::MAIL_ADDRESS],
-            User::IS_ADMIN => $request[User::IS_ADMIN],
-            User::DEFAULT_AREA_ID  => $request[User::DEFAULT_AREA_ID]
+            User::DEFAULT_AREA_ID  => $request[User::DEFAULT_AREA_ID],
+            User::UPDATED_ID => $loginUser[User::ID]
         ];
         if ($request[User::PASSWORD]) {
             // リクエスト値にパスワードが存在した場合
             $user[User::PASSWORD] = Hash::make($request[User::PASSWORD]);
+        }
+        if ($isCreate) {
+            // 登録処理の場合
+            $user[User::IS_ADMIN] = $request[User::IS_ADMIN];
+            $user[User::CREATED_ID] = $loginUser[User::ID];
+        } else if ($loginUser[User::IS_ADMIN] & $id != $loginUser[User::ID]) {
+            // 更新処理の場合、かつ管理者権限が存在し、自分のデータではない場合
+            $user[User::IS_ADMIN] = $request[User::IS_ADMIN];
         }
         return $user;
     }
