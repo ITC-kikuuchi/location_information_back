@@ -116,9 +116,12 @@ class UserService
                 User::USER_NAME => $userData[User::USER_NAME],
                 User::USER_NAME_KANA => $userData[User::USER_NAME_KANA],
                 User::MAIL_ADDRESS => $userData[User::MAIL_ADDRESS],
-                User::IS_ADMIN => (bool)$userData[User::IS_ADMIN],
                 User::DEFAULT_AREA_ID => $userData[User::DEFAULT_AREA_ID],
             ];
+            if ($id != Auth::id()) {
+                // 自分のデータではない場合
+                $responseData[User::IS_ADMIN] = $userData[User::IS_ADMIN];
+            }
         } catch (Exception $e) {
             // エラーハンドリング
             return $this->exceptionHandler($e);
