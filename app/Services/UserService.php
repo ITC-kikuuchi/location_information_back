@@ -10,9 +10,11 @@ use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Traits\DataExistenceCheckTrait;
 use App\Traits\ExceptionHandlerTrait;
+use App\Traits\ExecutionAuthorityCheckTrait;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,6 +23,7 @@ class UserService
     use ResponseTrait;
     use ExceptionHandlerTrait;
     use DataExistenceCheckTrait;
+    use ExecutionAuthorityCheckTrait;
 
     /**
      * UserService コンストラクタ
@@ -42,6 +45,8 @@ class UserService
         // 初期値設定
         $responseData = [];
         try {
+            // 実行権限チェック
+            $this->AdminAuthorityAndIdCheck();
             // ユーザ一覧取得
             $users = $this->userRepositoryInterface->getUsers();
             // レスポンスデータの作成
@@ -71,8 +76,10 @@ class UserService
     public function createUser(CreateUserRequest $request): JsonResponse
     {
         try {
+            // 実行権限チェック
+            $this->AdminAuthorityAndIdCheck();
             // 登録データの作成
-            $user = $this->createUserData($request);
+            $user = $this->createUserData($request, true);
             // データベーストランザクションの開始
             DB::transaction(function () use ($user) {
                 // データ登録処理
@@ -97,8 +104,10 @@ class UserService
         // 初期値設定
         $responseData = [];
         try {
+            // 実行権限チェック
+            $this->AdminAuthorityAndIdCheck($id);
             // id に紐づくユーザの取得
-            $userData = $this->userRepositoryInterface->getUser($id);
+            $userData = $this->userRepositoryInterface->getUserDetail($id);
             // データ存在チェック
             $this->dataExistenceCheck($userData);
             // レスポンスデータの作成
@@ -107,9 +116,12 @@ class UserService
                 User::USER_NAME => $userData[User::USER_NAME],
                 User::USER_NAME_KANA => $userData[User::USER_NAME_KANA],
                 User::MAIL_ADDRESS => $userData[User::MAIL_ADDRESS],
-                User::IS_ADMIN => (bool)$userData[User::IS_ADMIN],
                 User::DEFAULT_AREA_ID => $userData[User::DEFAULT_AREA_ID],
             ];
+            if ($id != Auth::id()) {
+                // 自分のデータではない場合
+                $responseData[User::IS_ADMIN] = $userData[User::IS_ADMIN];
+            }
         } catch (Exception $e) {
             // エラーハンドリング
             return $this->exceptionHandler($e);
@@ -128,12 +140,14 @@ class UserService
     public function updateUser(UpdateUserRequest $request, int $id): JsonResponse
     {
         try {
+            // 実行権限チェック
+            $this->AdminAuthorityAndIdCheck($id);
             // id に紐づくユーザの取得
-            $userData = $this->userRepositoryInterface->getUser($id);
+            $userData = $this->userRepositoryInterface->getUserDetail($id);
             // データ存在チェック
             $this->dataExistenceCheck($userData);
             // 更新データの作成
-            $user = $this->createUserData($request);
+            $user = $this->createUserData($request, false, $id);
             // データベーストランザクションの開始
             DB::transaction(function () use ($id, $user) {
                 // データ更新処理
@@ -157,8 +171,10 @@ class UserService
     public function deleteUser(int $id): JsonResponse
     {
         try {
+            // 実行権限チェック
+            $this->AdminAuthorityAndIdCheck();
             // id に紐づくユーザのデータ存在チェック
-            $this->dataExistenceCheck($this->userRepositoryInterface->getUser($id));
+            $this->dataExistenceCheck($this->userRepositoryInterface->getUserDetail($id));
             // データベーストランザクションの開始
             DB::transaction(function () use ($id) {
                 // データ削除処理
@@ -176,21 +192,33 @@ class UserService
      * ユーザ情報作成処理
      *
      * @param object $request
+     * @param boolean $isCreate
+     * @param integer|null $id
      * @return array
      */
-    private function createUserData(object $request)
+    private function createUserData(object $request, bool $isCreate, int $id = null): array
     {
+        // 認証ユーザの取得
+        $loginUser = Auth::user();
         // ユーザ情報の作成
         $user = [
             User::USER_NAME => $request[User::USER_NAME],
             User::USER_NAME_KANA => $request[User::USER_NAME_KANA],
             User::MAIL_ADDRESS => $request[User::MAIL_ADDRESS],
-            User::IS_ADMIN => $request[User::IS_ADMIN],
-            User::DEFAULT_AREA_ID  => $request[User::DEFAULT_AREA_ID]
+            User::DEFAULT_AREA_ID  => $request[User::DEFAULT_AREA_ID],
+            User::UPDATED_ID => $loginUser[User::ID]
         ];
         if ($request[User::PASSWORD]) {
             // リクエスト値にパスワードが存在した場合
             $user[User::PASSWORD] = Hash::make($request[User::PASSWORD]);
+        }
+        if ($isCreate) {
+            // 登録処理の場合
+            $user[User::IS_ADMIN] = $request[User::IS_ADMIN];
+            $user[User::CREATED_ID] = $loginUser[User::ID];
+        } else if ($loginUser[User::IS_ADMIN] & $id != $loginUser[User::ID]) {
+            // 更新処理の場合、かつ管理者権限が存在し、自分のデータではない場合
+            $user[User::IS_ADMIN] = $request[User::IS_ADMIN];
         }
         return $user;
     }

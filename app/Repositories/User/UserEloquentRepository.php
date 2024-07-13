@@ -47,7 +47,7 @@ class UserEloquentRepository implements UserRepositoryInterface
      * @param integer $id
      * @return object|null
      */
-    public function getUser(int $id): object|null
+    public function getUserDetail(int $id): object|null
     {
         return $this->user->find($id);
     }
