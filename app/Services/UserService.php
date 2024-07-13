@@ -45,6 +45,8 @@ class UserService
         // 初期値設定
         $responseData = [];
         try {
+            // 実行権限チェック
+            $this->AdminAuthorityAndIdCheck();
             // ユーザ一覧取得
             $users = $this->userRepositoryInterface->getUsers();
             // レスポンスデータの作成
@@ -74,6 +76,8 @@ class UserService
     public function createUser(CreateUserRequest $request): JsonResponse
     {
         try {
+            // 実行権限チェック
+            $this->AdminAuthorityAndIdCheck();
             // 登録データの作成
             $user = $this->createUserData($request);
             // データベーストランザクションの開始
@@ -100,6 +104,8 @@ class UserService
         // 初期値設定
         $responseData = [];
         try {
+            // 実行権限チェック
+            $this->AdminAuthorityAndIdCheck($id);
             // id に紐づくユーザの取得
             $userData = $this->userRepositoryInterface->getUser($id);
             // データ存在チェック
@@ -131,6 +137,8 @@ class UserService
     public function updateUser(UpdateUserRequest $request, int $id): JsonResponse
     {
         try {
+            // 実行権限チェック
+            $this->AdminAuthorityAndIdCheck($id);
             // id に紐づくユーザの取得
             $userData = $this->userRepositoryInterface->getUser($id);
             // データ存在チェック
@@ -160,6 +168,8 @@ class UserService
     public function deleteUser(int $id): JsonResponse
     {
         try {
+            // 実行権限チェック
+            $this->AdminAuthorityAndIdCheck();
             // id に紐づくユーザのデータ存在チェック
             $this->dataExistenceCheck($this->userRepositoryInterface->getUser($id));
             // データベーストランザクションの開始
