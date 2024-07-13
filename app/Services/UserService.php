@@ -10,9 +10,11 @@ use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Traits\DataExistenceCheckTrait;
 use App\Traits\ExceptionHandlerTrait;
+use App\Traits\ExecutionAuthorityCheckTrait;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,6 +23,7 @@ class UserService
     use ResponseTrait;
     use ExceptionHandlerTrait;
     use DataExistenceCheckTrait;
+    use ExecutionAuthorityCheckTrait;
 
     /**
      * UserService コンストラクタ
