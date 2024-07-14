@@ -196,7 +196,7 @@ class UserService
      * @param integer|null $id
      * @return array
      */
-    private function createUserData(object $request, bool $isCreate, int $id = null): array
+    private function formatUserData(object $request, bool $isCreate, int $id = null): array
     {
         // 認証ユーザの取得
         $loginUser = Auth::user();
