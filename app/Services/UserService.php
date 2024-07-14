@@ -79,7 +79,7 @@ class UserService
             // 実行権限チェック
             $this->AdminAuthorityAndIdCheck();
             // 登録データの作成
-            $user = $this->createUserData($request, true);
+            $user = $this->formatUserData($request, true);
             // データベーストランザクションの開始
             DB::transaction(function () use ($user) {
                 // データ登録処理
@@ -147,7 +147,7 @@ class UserService
             // データ存在チェック
             $this->dataExistenceCheck($userData);
             // 更新データの作成
-            $user = $this->createUserData($request, false, $id);
+            $user = $this->formatUserData($request, false, $id);
             // データベーストランザクションの開始
             DB::transaction(function () use ($id, $user) {
                 // データ更新処理
