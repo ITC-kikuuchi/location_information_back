@@ -180,7 +180,7 @@ class AreaService
      * @param boolean|null $isCreate
      * @return array $area
      */
-    function formatAreaData(object $request, bool|null $isCreate = false): array
+    function formatAreaData(object $request, bool $isCreate = false): array
     {
         // 認証済みユーザの ID の取得
         $loginUserId = Auth::id();
