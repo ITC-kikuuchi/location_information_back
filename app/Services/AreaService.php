@@ -88,7 +88,6 @@ class AreaService
         return $this->okResponse();
     }
 
-
     /**
      * エリア詳細取得
      *
