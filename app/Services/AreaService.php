@@ -177,10 +177,10 @@ class AreaService
      * エリア情報作成処理
      *
      * @param object $request
-     * @param boolean|null $is_create
+     * @param boolean|null $isCreate
      * @return array $area
      */
-    function createAreaData(object $request, bool|null $is_create = false): array
+    function formatAreaData(object $request, bool|null $isCreate = false): array
     {
         // 認証済みユーザの ID の取得
         $loginUserId = Auth::id();
@@ -190,7 +190,7 @@ class AreaService
             Area::IS_DEFAULT_AREA => (bool)$request[Area::IS_DEFAULT_AREA],
             Area::UPDATED_ID => $loginUserId,
         ];
-        if ($is_create) {
+        if ($isCreate) {
             // エリア登録処理の場合
             $area[Area::CREATED_ID] = $loginUserId;
         }
