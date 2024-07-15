@@ -102,7 +102,7 @@ class AreaService
             // 実行権限チェック
             $this->AdminAuthorityAndIdCheck();
             // エリア詳細取得
-            $area = $this->areaRepositoryInterface->getArea($id);
+            $area = $this->areaRepositoryInterface->getAreaDetail($id);
             // データ存在チェック
             $this->dataExistenceCheck($area);
             // レスポンスデータの作成
@@ -158,7 +158,7 @@ class AreaService
             // 実行権限チェック
             $this->AdminAuthorityAndIdCheck();
             // データ存在チェック
-            $this->dataExistenceCheck($this->areaRepositoryInterface->getArea($id));
+            $this->dataExistenceCheck($this->areaRepositoryInterface->getAreaDetail($id));
             // データベーストランザクションの開始
             DB::transaction(function () use ($id) {
                 // データ削除処理

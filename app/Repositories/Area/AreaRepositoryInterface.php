@@ -26,7 +26,7 @@ interface AreaRepositoryInterface
      * @param integer $id
      * @return object|null
      */
-    public function getArea(int $id): object|null;
+    public function getAreaDetail(int $id): object|null;
 
     /**
      * エリア更新
