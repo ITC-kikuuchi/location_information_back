@@ -72,9 +72,9 @@ class AreaService
     {
         try {
             // 実行権限チェック
-            $this->ExecutionAuthorityCheck();
-            // エリア情報の作成
-            $area = $this->createAreaData($request, true);
+            $this->AdminAuthorityAndIdCheck();
+            // 登録データの作成
+            $area = $this->formatAreaData($request, true);
             // データベーストランザクションの開始
             DB::transaction(function () use ($area) {
                 // データ登録処理
@@ -88,7 +88,6 @@ class AreaService
         return $this->okResponse();
     }
 
-
     /**
      * エリア詳細取得
      *
@@ -100,9 +99,9 @@ class AreaService
         $responseData = [];
         try {
             // 実行権限チェック
-            $this->ExecutionAuthorityCheck();
+            $this->AdminAuthorityAndIdCheck();
             // エリア詳細取得
-            $area = $this->areaRepositoryInterface->getArea($id);
+            $area = $this->areaRepositoryInterface->getAreaDetail($id);
             // データ存在チェック
             $this->dataExistenceCheck($area);
             // レスポンスデータの作成
@@ -130,9 +129,9 @@ class AreaService
     {
         try {
             // 実行権限チェック
-            $this->ExecutionAuthorityCheck();
-            // エリア情報の作成
-            $area = $this->createAreaData($request, true);
+            $this->AdminAuthorityAndIdCheck();
+            // 更新データの作成
+            $area = $this->formatAreaData($request, true);
             // データベーストランザクションの開始
             DB::transaction(function () use ($id, $area) {
                 // データ更新処理
@@ -156,9 +155,9 @@ class AreaService
     {
         try {
             // 実行権限チェック
-            $this->ExecutionAuthorityCheck();
+            $this->AdminAuthorityAndIdCheck();
             // データ存在チェック
-            $this->dataExistenceCheck($this->areaRepositoryInterface->getArea($id));
+            $this->dataExistenceCheck($this->areaRepositoryInterface->getAreaDetail($id));
             // データベーストランザクションの開始
             DB::transaction(function () use ($id) {
                 // データ削除処理
@@ -177,10 +176,10 @@ class AreaService
      * エリア情報作成処理
      *
      * @param object $request
-     * @param boolean|null $is_create
+     * @param boolean|null $isCreate
      * @return array $area
      */
-    function createAreaData(object $request, bool|null $is_create = false): array
+    function formatAreaData(object $request, bool $isCreate = false): array
     {
         // 認証済みユーザの ID の取得
         $loginUserId = Auth::id();
@@ -190,7 +189,7 @@ class AreaService
             Area::IS_DEFAULT_AREA => (bool)$request[Area::IS_DEFAULT_AREA],
             Area::UPDATED_ID => $loginUserId,
         ];
-        if ($is_create) {
+        if ($isCreate) {
             // エリア登録処理の場合
             $area[Area::CREATED_ID] = $loginUserId;
         }
