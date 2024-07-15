@@ -74,7 +74,7 @@ class AreaService
             // 実行権限チェック
             $this->AdminAuthorityAndIdCheck();
             // エリア情報の作成
-            $area = $this->createAreaData($request, true);
+            $area = $this->formatAreaData($request, true);
             // データベーストランザクションの開始
             DB::transaction(function () use ($area) {
                 // データ登録処理
@@ -132,7 +132,7 @@ class AreaService
             // 実行権限チェック
             $this->AdminAuthorityAndIdCheck();
             // エリア情報の作成
-            $area = $this->createAreaData($request, true);
+            $area = $this->formatAreaData($request, true);
             // データベーストランザクションの開始
             DB::transaction(function () use ($id, $area) {
                 // データ更新処理
