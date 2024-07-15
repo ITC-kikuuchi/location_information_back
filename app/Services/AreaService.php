@@ -72,7 +72,7 @@ class AreaService
     {
         try {
             // 実行権限チェック
-            $this->ExecutionAuthorityCheck();
+            $this->AdminAuthorityAndIdCheck();
             // エリア情報の作成
             $area = $this->createAreaData($request, true);
             // データベーストランザクションの開始
@@ -100,7 +100,7 @@ class AreaService
         $responseData = [];
         try {
             // 実行権限チェック
-            $this->ExecutionAuthorityCheck();
+            $this->AdminAuthorityAndIdCheck();
             // エリア詳細取得
             $area = $this->areaRepositoryInterface->getArea($id);
             // データ存在チェック
@@ -130,7 +130,7 @@ class AreaService
     {
         try {
             // 実行権限チェック
-            $this->ExecutionAuthorityCheck();
+            $this->AdminAuthorityAndIdCheck();
             // エリア情報の作成
             $area = $this->createAreaData($request, true);
             // データベーストランザクションの開始
@@ -156,7 +156,7 @@ class AreaService
     {
         try {
             // 実行権限チェック
-            $this->ExecutionAuthorityCheck();
+            $this->AdminAuthorityAndIdCheck();
             // データ存在チェック
             $this->dataExistenceCheck($this->areaRepositoryInterface->getArea($id));
             // データベーストランザクションの開始
