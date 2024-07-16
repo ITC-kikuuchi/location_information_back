@@ -29,11 +29,11 @@ trait CheckExecutionAuthorityTrait
     }
 
     /**
-     * IDチェック
+     * ID一致チェック
      *
      * @param integer $userId
      */
-    public function IdCheck(int $userId)
+    public function checkIdMatch(int $userId)
     {
         if ($userId != Auth::Id()) {
             // リクエスト値と　　ログインユーザの id が一致しない場合
