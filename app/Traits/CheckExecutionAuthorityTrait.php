@@ -8,14 +8,14 @@ use App\Exceptions\ForbiddenException;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-trait ExecutionAuthorityCheckTrait
+trait CheckExecutionAuthorityTrait
 {
     /**
      * 管理者権限及びIDチェック
      *
      * @param int $userId
      */
-    public function AdminAuthorityAndIdCheck(int $userId = null)
+    public function checkExecutionAuthority(int $userId = null)
     {
         // 認証済みユーザの取得
         $user = Auth::user();
@@ -29,11 +29,11 @@ trait ExecutionAuthorityCheckTrait
     }
 
     /**
-     * IDチェック
+     * ID一致チェック
      *
      * @param integer $userId
      */
-    public function IdCheck(int $userId)
+    public function checkIdMatch(int $userId)
     {
         if ($userId != Auth::Id()) {
             // リクエスト値と　　ログインユーザの id が一致しない場合

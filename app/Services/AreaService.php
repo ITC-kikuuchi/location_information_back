@@ -8,9 +8,9 @@ use App\Http\Requests\Area\CreateAreaRequest;
 use App\Http\Requests\Area\UpdateAreaRequest;
 use App\Models\Area;
 use App\Repositories\Area\AreaRepositoryInterface;
-use App\Traits\DataExistenceCheckTrait;
+use App\Traits\CheckDataExistenceTrait;
+use App\Traits\CheckExecutionAuthorityTrait;
 use App\Traits\ExceptionHandlerTrait;
-use App\Traits\ExecutionAuthorityCheckTrait;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -21,8 +21,8 @@ class AreaService
 {
     use ResponseTrait;
     use ExceptionHandlerTrait;
-    use ExecutionAuthorityCheckTrait;
-    use DataExistenceCheckTrait;
+    use CheckDataExistenceTrait;
+    use CheckExecutionAuthorityTrait;
 
     /**
      * AreaService コンストラクタ
@@ -72,7 +72,7 @@ class AreaService
     {
         try {
             // 実行権限チェック
-            $this->AdminAuthorityAndIdCheck();
+            $this->checkExecutionAuthority();
             // 登録データの作成
             $area = $this->formatAreaData($request, true);
             // データベーストランザクションの開始
@@ -99,11 +99,11 @@ class AreaService
         $responseData = [];
         try {
             // 実行権限チェック
-            $this->AdminAuthorityAndIdCheck();
+            $this->checkExecutionAuthority();
             // エリア詳細取得
             $area = $this->areaRepositoryInterface->getAreaDetail($id);
             // データ存在チェック
-            $this->dataExistenceCheck($area);
+            $this->checkDataExistence($area);
             // レスポンスデータの作成
             $responseData = [
                 Area::ID => $area[Area::ID],
@@ -129,7 +129,7 @@ class AreaService
     {
         try {
             // 実行権限チェック
-            $this->AdminAuthorityAndIdCheck();
+            $this->checkExecutionAuthority();
             // 更新データの作成
             $area = $this->formatAreaData($request, true);
             // データベーストランザクションの開始
@@ -155,9 +155,9 @@ class AreaService
     {
         try {
             // 実行権限チェック
-            $this->AdminAuthorityAndIdCheck();
+            $this->checkExecutionAuthority();
             // データ存在チェック
-            $this->dataExistenceCheck($this->areaRepositoryInterface->getAreaDetail($id));
+            $this->checkDataExistence($this->areaRepositoryInterface->getAreaDetail($id));
             // データベーストランザクションの開始
             DB::transaction(function () use ($id) {
                 // データ削除処理

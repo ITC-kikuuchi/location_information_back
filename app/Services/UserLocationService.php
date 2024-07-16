@@ -11,9 +11,9 @@ use App\Models\Attendance;
 use App\Models\User;
 use App\Models\UserStatus;
 use App\Repositories\User\UserRepositoryInterface;
-use App\Traits\DataExistenceCheckTrait;
+use App\Traits\CheckDataExistenceTrait;
+use App\Traits\CheckExecutionAuthorityTrait;
 use App\Traits\ExceptionHandlerTrait;
-use App\Traits\ExecutionAuthorityCheckTrait;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -23,8 +23,8 @@ class UserLocationService
 {
     use ResponseTrait;
     use ExceptionHandlerTrait;
-    use DataExistenceCheckTrait;
-    use ExecutionAuthorityCheckTrait;
+    use CheckDataExistenceTrait;
+    use CheckExecutionAuthorityTrait;
 
     /**
      * UserLocationService コンストラクタ
@@ -83,7 +83,7 @@ class UserLocationService
         try {
             $userLocation = $this->userRepositoryInterface->getUserLocationDetail($id);
             // データ存在チェック
-            $this->dataExistenceCheck($userLocation);
+            $this->checkDataExistence($userLocation);
             // レスポンスデータの作成
             $responseData = [
                 User::ID => $userLocation[User::ID],
@@ -111,11 +111,11 @@ class UserLocationService
     {
         try {
             // 実行権限チェック
-            $this->IdCheck($id);
+            $this->checkIdMatch($id);
             // id に紐づくユーザの取得
             $user = $this->userRepositoryInterface->getUserDetail($id);
             // データ存在チェック
-            $this->dataExistenceCheck($user);
+            $this->checkDataExistence($user);
             // 更新データの作成
             if ($request[User::ATTENDANCE_ID]) {
                 // 勤怠ID が存在した場合

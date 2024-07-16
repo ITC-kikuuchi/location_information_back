@@ -8,9 +8,9 @@ use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
-use App\Traits\DataExistenceCheckTrait;
+use App\Traits\CheckDataExistenceTrait;
+use App\Traits\CheckExecutionAuthorityTrait;
 use App\Traits\ExceptionHandlerTrait;
-use App\Traits\ExecutionAuthorityCheckTrait;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -22,8 +22,8 @@ class UserService
 {
     use ResponseTrait;
     use ExceptionHandlerTrait;
-    use DataExistenceCheckTrait;
-    use ExecutionAuthorityCheckTrait;
+    use CheckDataExistenceTrait;
+    use CheckExecutionAuthorityTrait;
 
     /**
      * UserService コンストラクタ
@@ -46,7 +46,7 @@ class UserService
         $responseData = [];
         try {
             // 実行権限チェック
-            $this->AdminAuthorityAndIdCheck();
+            $this->checkExecutionAuthority();
             // ユーザ一覧取得
             $users = $this->userRepositoryInterface->getUsers();
             // レスポンスデータの作成
@@ -77,7 +77,7 @@ class UserService
     {
         try {
             // 実行権限チェック
-            $this->AdminAuthorityAndIdCheck();
+            $this->checkExecutionAuthority();
             // 登録データの作成
             $user = $this->formatUserData($request, true);
             // データベーストランザクションの開始
@@ -105,11 +105,11 @@ class UserService
         $responseData = [];
         try {
             // 実行権限チェック
-            $this->AdminAuthorityAndIdCheck($id);
+            $this->checkExecutionAuthority($id);
             // id に紐づくユーザの取得
             $userData = $this->userRepositoryInterface->getUserDetail($id);
             // データ存在チェック
-            $this->dataExistenceCheck($userData);
+            $this->checkDataExistence($userData);
             // レスポンスデータの作成
             $responseData = [
                 User::ID => $userData[User::ID],
@@ -141,11 +141,11 @@ class UserService
     {
         try {
             // 実行権限チェック
-            $this->AdminAuthorityAndIdCheck($id);
+            $this->checkExecutionAuthority($id);
             // id に紐づくユーザの取得
             $userData = $this->userRepositoryInterface->getUserDetail($id);
             // データ存在チェック
-            $this->dataExistenceCheck($userData);
+            $this->checkDataExistence($userData);
             // 更新データの作成
             $user = $this->formatUserData($request, false, $id);
             // データベーストランザクションの開始
@@ -172,9 +172,9 @@ class UserService
     {
         try {
             // 実行権限チェック
-            $this->AdminAuthorityAndIdCheck();
+            $this->checkExecutionAuthority();
             // id に紐づくユーザのデータ存在チェック
-            $this->dataExistenceCheck($this->userRepositoryInterface->getUserDetail($id));
+            $this->checkDataExistence($this->userRepositoryInterface->getUserDetail($id));
             // データベーストランザクションの開始
             DB::transaction(function () use ($id) {
                 // データ削除処理

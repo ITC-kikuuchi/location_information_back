@@ -6,14 +6,14 @@ namespace App\Traits;
 
 use App\Exceptions\NotFoundException;
 
-trait DataExistenceCheckTrait
+trait CheckDataExistenceTrait
 {
     /**
      * データ存在チェック処理
      *
      * @param object|null $data
      */
-    public function dataExistenceCheck(object|null $data): void
+    public function checkDataExistence(object|null $data): void
     {
         if (!$data) {
             // データが存在しなかった場合
