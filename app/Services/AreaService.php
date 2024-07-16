@@ -94,7 +94,7 @@ class AreaService
      * @param integer $id
      * @return JsonResponse
      */
-    public function getDetailArea(int $id): JsonResponse
+    public function getAreaDetail(int $id): JsonResponse
     {
         $responseData = [];
         try {
