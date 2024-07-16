@@ -46,7 +46,7 @@ class UserService
         $responseData = [];
         try {
             // 実行権限チェック
-            $this->CheckExecutionAuthority();
+            $this->checkExecutionAuthority();
             // ユーザ一覧取得
             $users = $this->userRepositoryInterface->getUsers();
             // レスポンスデータの作成
@@ -77,7 +77,7 @@ class UserService
     {
         try {
             // 実行権限チェック
-            $this->CheckExecutionAuthority();
+            $this->checkExecutionAuthority();
             // 登録データの作成
             $user = $this->formatUserData($request, true);
             // データベーストランザクションの開始
@@ -105,7 +105,7 @@ class UserService
         $responseData = [];
         try {
             // 実行権限チェック
-            $this->CheckExecutionAuthority($id);
+            $this->checkExecutionAuthority($id);
             // id に紐づくユーザの取得
             $userData = $this->userRepositoryInterface->getUserDetail($id);
             // データ存在チェック
@@ -141,7 +141,7 @@ class UserService
     {
         try {
             // 実行権限チェック
-            $this->CheckExecutionAuthority($id);
+            $this->checkExecutionAuthority($id);
             // id に紐づくユーザの取得
             $userData = $this->userRepositoryInterface->getUserDetail($id);
             // データ存在チェック
@@ -172,7 +172,7 @@ class UserService
     {
         try {
             // 実行権限チェック
-            $this->CheckExecutionAuthority();
+            $this->checkExecutionAuthority();
             // id に紐づくユーザのデータ存在チェック
             $this->checkDataExistence($this->userRepositoryInterface->getUserDetail($id));
             // データベーストランザクションの開始
