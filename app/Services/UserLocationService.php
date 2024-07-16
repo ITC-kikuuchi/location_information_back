@@ -73,6 +73,7 @@ class UserLocationService
     /**
      * ユーザ位置情報詳細取得
      *
+     * @param integer $id
      * @return JsonResponse
      */
     public function getDetailUserLocation(int $id): JsonResponse
