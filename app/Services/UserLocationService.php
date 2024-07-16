@@ -11,9 +11,9 @@ use App\Models\Attendance;
 use App\Models\User;
 use App\Models\UserStatus;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Traits\CheckExecutionAuthorityTrait;
 use App\Traits\DataExistenceCheckTrait;
 use App\Traits\ExceptionHandlerTrait;
-use App\Traits\ExecutionAuthorityCheckTrait;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -24,7 +24,7 @@ class UserLocationService
     use ResponseTrait;
     use ExceptionHandlerTrait;
     use DataExistenceCheckTrait;
-    use ExecutionAuthorityCheckTrait;
+    use CheckExecutionAuthorityTrait;
 
     /**
      * UserLocationService コンストラクタ
