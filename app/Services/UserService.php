@@ -8,9 +8,9 @@ use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Traits\CheckExecutionAuthorityTrait;
 use App\Traits\DataExistenceCheckTrait;
 use App\Traits\ExceptionHandlerTrait;
-use App\Traits\ExecutionAuthorityCheckTrait;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -23,7 +23,7 @@ class UserService
     use ResponseTrait;
     use ExceptionHandlerTrait;
     use DataExistenceCheckTrait;
-    use ExecutionAuthorityCheckTrait;
+    use CheckExecutionAuthorityTrait;
 
     /**
      * UserService コンストラクタ
