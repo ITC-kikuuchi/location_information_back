@@ -8,7 +8,7 @@ use App\Exceptions\ForbiddenException;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-trait ExecutionAuthorityCheckTrait
+trait CheckExecutionAuthorityTrait
 {
     /**
      * 管理者権限及びIDチェック
