@@ -78,7 +78,7 @@ class UserEloquentRepository implements UserRepositoryInterface
      *
      * @return object|null
      */
-    public function getUsersLocations(): object|null
+    public function getUserLocations(): object|null
     {
         return $this->user
             ->select(
@@ -99,7 +99,7 @@ class UserEloquentRepository implements UserRepositoryInterface
      * @param int $id
      * @return object|null
      */
-    public function getDetailUserLocation(int $id): object|null
+    public function getUserLocationDetail(int $id): object|null
     {
         return $this->user->select(
             User::TABLE . '.' . User::ID,

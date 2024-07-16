@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserLocation\UpdateUserLocationRequest;
 use App\Services\UserLocationService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UserLocationController extends Controller
 {
@@ -37,7 +36,7 @@ class UserLocationController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        return $this->userLocationService->getDetailUserLocation($id);
+        return $this->userLocationService->getUserLocationDetail($id);
     }
 
     /**

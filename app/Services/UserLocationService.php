@@ -17,7 +17,6 @@ use App\Traits\ExecutionAuthorityCheckTrait;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserLocationService
@@ -48,7 +47,7 @@ class UserLocationService
         $responseData = [];
         try {
             // ユーザ位置情報一覧取得
-            $userLocations = $this->userRepositoryInterface->getUsersLocations();
+            $userLocations = $this->userRepositoryInterface->getUserLocations();
             // レスポンスデータの作成
             foreach ($userLocations as $userLocation) {
                 $responseData[User::USER_LIST][] = [
@@ -74,14 +73,15 @@ class UserLocationService
     /**
      * ユーザ位置情報詳細取得
      *
+     * @param integer $id
      * @return JsonResponse
      */
-    public function getDetailUserLocation(int $id): JsonResponse
+    public function getUserLocationDetail(int $id): JsonResponse
     {
         // 初期値設定
         $responseData = [];
         try {
-            $userLocation = $this->userRepositoryInterface->getDetailUserLocation($id);
+            $userLocation = $this->userRepositoryInterface->getUserLocationDetail($id);
             // データ存在チェック
             $this->dataExistenceCheck($userLocation);
             // レスポンスデータの作成
@@ -113,7 +113,7 @@ class UserLocationService
             // 実行権限チェック
             $this->IdCheck($id);
             // id に紐づくユーザの取得
-            $user = $this->userRepositoryInterface->getUser($id);
+            $user = $this->userRepositoryInterface->getUserDetail($id);
             // データ存在チェック
             $this->dataExistenceCheck($user);
             // 更新データの作成
