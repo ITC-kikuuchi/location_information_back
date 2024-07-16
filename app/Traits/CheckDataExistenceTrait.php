@@ -6,7 +6,7 @@ namespace App\Traits;
 
 use App\Exceptions\NotFoundException;
 
-trait DataExistenceCheckTrait
+trait CheckDataExistenceTrait
 {
     /**
      * データ存在チェック処理
