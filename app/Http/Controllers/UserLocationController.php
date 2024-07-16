@@ -36,7 +36,7 @@ class UserLocationController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        return $this->userLocationService->getDetailUserLocation($id);
+        return $this->userLocationService->getUserLocationDetail($id);
     }
 
     /**

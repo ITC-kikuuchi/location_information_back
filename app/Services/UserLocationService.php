@@ -76,12 +76,12 @@ class UserLocationService
      * @param integer $id
      * @return JsonResponse
      */
-    public function getDetailUserLocation(int $id): JsonResponse
+    public function getUserLocationDetail(int $id): JsonResponse
     {
         // 初期値設定
         $responseData = [];
         try {
-            $userLocation = $this->userRepositoryInterface->getDetailUserLocation($id);
+            $userLocation = $this->userRepositoryInterface->getUserLocationDetail($id);
             // データ存在チェック
             $this->dataExistenceCheck($userLocation);
             // レスポンスデータの作成
