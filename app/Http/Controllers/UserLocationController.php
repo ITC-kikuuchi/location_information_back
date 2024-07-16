@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserLocation\UpdateUserLocationRequest;
 use App\Services\UserLocationService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UserLocationController extends Controller
 {
