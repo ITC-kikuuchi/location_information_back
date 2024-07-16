@@ -130,6 +130,8 @@ class AreaService
         try {
             // 実行権限チェック
             $this->checkExecutionAuthority();
+            // id に紐づくユーザのデータ存在チェック
+            $this->checkDataExistence($this->areaRepositoryInterface->getAreaDetail($id));
             // 更新データの作成
             $area = $this->formatAreaData($request, true);
             // データベーストランザクションの開始
