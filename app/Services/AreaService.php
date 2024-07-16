@@ -158,7 +158,7 @@ class AreaService
         try {
             // 実行権限チェック
             $this->checkExecutionAuthority();
-            // データ存在チェック
+            // id に紐づくユーザのデータ存在チェック
             $this->checkDataExistence($this->areaRepositoryInterface->getAreaDetail($id));
             // データベーストランザクションの開始
             DB::transaction(function () use ($id) {
