@@ -15,7 +15,7 @@ trait CheckExecutionAuthorityTrait
      *
      * @param int $userId
      */
-    public function AdminAuthorityAndIdCheck(int $userId = null)
+    public function CheckExecutionAuthority(int $userId = null)
     {
         // 認証済みユーザの取得
         $user = Auth::user();
