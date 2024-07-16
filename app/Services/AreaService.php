@@ -8,8 +8,8 @@ use App\Http\Requests\Area\CreateAreaRequest;
 use App\Http\Requests\Area\UpdateAreaRequest;
 use App\Models\Area;
 use App\Repositories\Area\AreaRepositoryInterface;
+use App\Traits\CheckDataExistenceTrait;
 use App\Traits\CheckExecutionAuthorityTrait;
-use App\Traits\DataExistenceCheckTrait;
 use App\Traits\ExceptionHandlerTrait;
 use App\Traits\ResponseTrait;
 use Exception;
@@ -21,8 +21,8 @@ class AreaService
 {
     use ResponseTrait;
     use ExceptionHandlerTrait;
+    use CheckDataExistenceTrait;
     use CheckExecutionAuthorityTrait;
-    use DataExistenceCheckTrait;
 
     /**
      * AreaService コンストラクタ

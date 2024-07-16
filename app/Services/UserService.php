@@ -8,8 +8,8 @@ use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Traits\CheckDataExistenceTrait;
 use App\Traits\CheckExecutionAuthorityTrait;
-use App\Traits\DataExistenceCheckTrait;
 use App\Traits\ExceptionHandlerTrait;
 use App\Traits\ResponseTrait;
 use Exception;
@@ -22,7 +22,7 @@ class UserService
 {
     use ResponseTrait;
     use ExceptionHandlerTrait;
-    use DataExistenceCheckTrait;
+    use CheckDataExistenceTrait;
     use CheckExecutionAuthorityTrait;
 
     /**
