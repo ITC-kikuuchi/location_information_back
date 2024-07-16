@@ -8,9 +8,9 @@ use App\Http\Requests\Area\CreateAreaRequest;
 use App\Http\Requests\Area\UpdateAreaRequest;
 use App\Models\Area;
 use App\Repositories\Area\AreaRepositoryInterface;
+use App\Traits\CheckExecutionAuthorityTrait;
 use App\Traits\DataExistenceCheckTrait;
 use App\Traits\ExceptionHandlerTrait;
-use App\Traits\ExecutionAuthorityCheckTrait;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -21,7 +21,7 @@ class AreaService
 {
     use ResponseTrait;
     use ExceptionHandlerTrait;
-    use ExecutionAuthorityCheckTrait;
+    use CheckExecutionAuthorityTrait;
     use DataExistenceCheckTrait;
 
     /**
