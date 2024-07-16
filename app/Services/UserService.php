@@ -107,20 +107,20 @@ class UserService
             // 実行権限チェック
             $this->checkExecutionAuthority($id);
             // id に紐づくユーザの取得
-            $userData = $this->userRepositoryInterface->getUserDetail($id);
+            $user = $this->userRepositoryInterface->getUserDetail($id);
             // データ存在チェック
-            $this->checkDataExistence($userData);
+            $this->checkDataExistence($user);
             // レスポンスデータの作成
             $responseData = [
-                User::ID => $userData[User::ID],
-                User::USER_NAME => $userData[User::USER_NAME],
-                User::USER_NAME_KANA => $userData[User::USER_NAME_KANA],
-                User::MAIL_ADDRESS => $userData[User::MAIL_ADDRESS],
-                User::DEFAULT_AREA_ID => $userData[User::DEFAULT_AREA_ID],
+                User::ID => $user[User::ID],
+                User::USER_NAME => $user[User::USER_NAME],
+                User::USER_NAME_KANA => $user[User::USER_NAME_KANA],
+                User::MAIL_ADDRESS => $user[User::MAIL_ADDRESS],
+                User::DEFAULT_AREA_ID => $user[User::DEFAULT_AREA_ID],
             ];
             if ($id != Auth::id()) {
                 // 自分のデータではない場合
-                $responseData[User::IS_ADMIN] = $userData[User::IS_ADMIN];
+                $responseData[User::IS_ADMIN] = $user[User::IS_ADMIN];
             }
         } catch (Exception $e) {
             // エラーハンドリング
