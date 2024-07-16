@@ -109,7 +109,7 @@ class UserService
             // id に紐づくユーザの取得
             $userData = $this->userRepositoryInterface->getUserDetail($id);
             // データ存在チェック
-            $this->dataExistenceCheck($userData);
+            $this->checkDataExistence($userData);
             // レスポンスデータの作成
             $responseData = [
                 User::ID => $userData[User::ID],
@@ -145,7 +145,7 @@ class UserService
             // id に紐づくユーザの取得
             $userData = $this->userRepositoryInterface->getUserDetail($id);
             // データ存在チェック
-            $this->dataExistenceCheck($userData);
+            $this->checkDataExistence($userData);
             // 更新データの作成
             $user = $this->formatUserData($request, false, $id);
             // データベーストランザクションの開始
@@ -174,7 +174,7 @@ class UserService
             // 実行権限チェック
             $this->CheckExecutionAuthority();
             // id に紐づくユーザのデータ存在チェック
-            $this->dataExistenceCheck($this->userRepositoryInterface->getUserDetail($id));
+            $this->checkDataExistence($this->userRepositoryInterface->getUserDetail($id));
             // データベーストランザクションの開始
             DB::transaction(function () use ($id) {
                 // データ削除処理

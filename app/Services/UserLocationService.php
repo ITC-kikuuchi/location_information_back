@@ -83,7 +83,7 @@ class UserLocationService
         try {
             $userLocation = $this->userRepositoryInterface->getUserLocationDetail($id);
             // データ存在チェック
-            $this->dataExistenceCheck($userLocation);
+            $this->checkDataExistence($userLocation);
             // レスポンスデータの作成
             $responseData = [
                 User::ID => $userLocation[User::ID],
@@ -115,7 +115,7 @@ class UserLocationService
             // id に紐づくユーザの取得
             $user = $this->userRepositoryInterface->getUserDetail($id);
             // データ存在チェック
-            $this->dataExistenceCheck($user);
+            $this->checkDataExistence($user);
             // 更新データの作成
             if ($request[User::ATTENDANCE_ID]) {
                 // 勤怠ID が存在した場合

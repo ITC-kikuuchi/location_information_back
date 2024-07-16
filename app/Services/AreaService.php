@@ -103,7 +103,7 @@ class AreaService
             // エリア詳細取得
             $area = $this->areaRepositoryInterface->getAreaDetail($id);
             // データ存在チェック
-            $this->dataExistenceCheck($area);
+            $this->checkDataExistence($area);
             // レスポンスデータの作成
             $responseData = [
                 Area::ID => $area[Area::ID],
@@ -157,7 +157,7 @@ class AreaService
             // 実行権限チェック
             $this->CheckExecutionAuthority();
             // データ存在チェック
-            $this->dataExistenceCheck($this->areaRepositoryInterface->getAreaDetail($id));
+            $this->checkDataExistence($this->areaRepositoryInterface->getAreaDetail($id));
             // データベーストランザクションの開始
             DB::transaction(function () use ($id) {
                 // データ削除処理
