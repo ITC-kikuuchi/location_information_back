@@ -48,7 +48,7 @@ class AreaController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        return $this->areaService->getDetailArea($id);
+        return $this->areaService->getAreaDetail($id);
     }
 
     /**
