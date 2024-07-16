@@ -113,7 +113,7 @@ class UserLocationService
             // 実行権限チェック
             $this->IdCheck($id);
             // id に紐づくユーザの取得
-            $user = $this->userRepositoryInterface->getUser($id);
+            $user = $this->userRepositoryInterface->getUserDetail($id);
             // データ存在チェック
             $this->dataExistenceCheck($user);
             // 更新データの作成
