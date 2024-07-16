@@ -48,7 +48,7 @@ interface UserRepositoryInterface
      *
      * @return object|null
      */
-    public function getUsersLocations(): object|null;
+    public function getUserLocations(): object|null;
 
     /**
      * ユーザ位置情報詳細取得

@@ -78,7 +78,7 @@ class UserEloquentRepository implements UserRepositoryInterface
      *
      * @return object|null
      */
-    public function getUsersLocations(): object|null
+    public function getUserLocations(): object|null
     {
         return $this->user
             ->select(

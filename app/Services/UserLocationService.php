@@ -47,7 +47,7 @@ class UserLocationService
         $responseData = [];
         try {
             // ユーザ位置情報一覧取得
-            $userLocations = $this->userRepositoryInterface->getUsersLocations();
+            $userLocations = $this->userRepositoryInterface->getUserLocations();
             // レスポンスデータの作成
             foreach ($userLocations as $userLocation) {
                 $responseData[User::USER_LIST][] = [
