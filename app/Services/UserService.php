@@ -142,10 +142,8 @@ class UserService
         try {
             // 実行権限チェック
             $this->checkExecutionAuthority($id);
-            // id に紐づくユーザの取得
-            $userData = $this->userRepositoryInterface->getUserDetail($id);
-            // データ存在チェック
-            $this->checkDataExistence($userData);
+            // id に紐づくユーザのデータ存在チェック
+            $this->checkDataExistence($this->userRepositoryInterface->getUserDetail($id));
             // 更新データの作成
             $user = $this->formatUserData($request, false, $id);
             // データベーストランザクションの開始
