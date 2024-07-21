@@ -25,9 +25,9 @@ class UserEloquentRepository implements UserRepositoryInterface
     /**
      * ユーザ一覧取得
      *
-     * @return object|null
+     * @return Collection
      */
-    public function getUsers(): object|null
+    public function getUsers(): Collection
     {
         return $this->user->get();
     }
@@ -77,9 +77,9 @@ class UserEloquentRepository implements UserRepositoryInterface
     /**
      * ユーザ位置情報一覧取得
      *
-     * @return object|null
+     * @return Collection
      */
-    public function getUserLocations(): object|null
+    public function getUserLocations(): Collection
     {
         return $this->user
             ->select(

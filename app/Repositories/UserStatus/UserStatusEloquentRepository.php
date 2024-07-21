@@ -22,9 +22,9 @@ class UserStatusEloquentRepository implements UserStatusRepositoryInterface
     /**
      * ユーザステータス一覧取得
      *
-     * @return object|null
+     * @return Collection
      */
-    public function getUserStatuses(): object|null
+    public function getUserStatuses(): Collection
     {
         return $this->userStatus->get();
     }

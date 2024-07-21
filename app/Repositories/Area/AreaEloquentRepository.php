@@ -22,9 +22,9 @@ class AreaEloquentRepository implements AreaRepositoryInterface
     /**
      * エリア一覧取得
      *
-     * @return object|null
+     * @return Collection
      */
-    public function getAreas(): object|null
+    public function getAreas(): Collection
     {
         return $this->area->get();
     }

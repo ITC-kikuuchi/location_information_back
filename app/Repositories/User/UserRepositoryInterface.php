@@ -11,9 +11,9 @@ interface UserRepositoryInterface
     /**
      * ユーザ一覧取得
      *
-     * @return object|null
+     * @return Collection
      */
-    public function getUsers(): object|null;
+    public function getUsers(): Collection;
 
     /**
      * ユーザ登録処理
@@ -48,9 +48,9 @@ interface UserRepositoryInterface
     /**
      * ユーザ位置情報一覧取得
      *
-     * @return object|null
+     * @return Collection
      */
-    public function getUserLocations(): object|null;
+    public function getUserLocations(): Collection;
 
     /**
      * ユーザ位置情報詳細取得

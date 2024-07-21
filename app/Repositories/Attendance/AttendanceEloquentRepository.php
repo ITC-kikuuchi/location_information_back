@@ -22,9 +22,9 @@ class AttendanceEloquentRepository implements AttendanceRepositoryInterface
     /**
      * 勤怠状況一覧取得
      *
-     * @return object|null
+     * @return Collection
      */
-    public function getAttendances(): object|null
+    public function getAttendances(): Collection
     {
         return $this->attendance->get();
     }
