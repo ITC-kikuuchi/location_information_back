@@ -14,7 +14,7 @@ enum SettingLocation: int
     case FIVE = 5;
 
     /**
-     * 勤怠ID に紐づく エリアID の返却
+     * 勤怠ID に紐づく エリアID の設定
      *
      * @param integer $attendance_id
      * @param integer $default_area_id
@@ -32,7 +32,7 @@ enum SettingLocation: int
     }
 
     /**
-     * 勤怠ID に紐づく ステータスID の返却
+     * 勤怠ID に紐づく ステータスID の設定
      *
      * @param integer $attendance_id
      * @return integer
