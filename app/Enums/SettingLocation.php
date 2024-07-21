@@ -20,7 +20,7 @@ enum SettingLocation: int
      * @param integer $default_area_id
      * @return integer
      */
-    public static function getAreaId(int $attendance_id, int $default_area_id): int
+    public static function settingAreaId(int $attendance_id, int $default_area_id): int
     {
         return match ($attendance_id) {
             self::ONE->value => $default_area_id,
@@ -37,7 +37,7 @@ enum SettingLocation: int
      * @param integer $attendance_id
      * @return integer
      */
-    public static function getUserStatusId(int $attendance_id): int
+    public static function settingUserStatusId(int $attendance_id): int
     {
         return match ($attendance_id) {
             self::ONE->value => UserStatus::OWN_SEAT->value,
