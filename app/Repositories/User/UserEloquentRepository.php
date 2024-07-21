@@ -8,6 +8,7 @@ use App\Models\Area;
 use App\Models\Attendance;
 use App\Models\User;
 use App\Models\UserStatus;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserEloquentRepository implements UserRepositoryInterface
 {

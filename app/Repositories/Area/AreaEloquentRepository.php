@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repositories\Area;
 
 use App\Models\Area;
+use Illuminate\Database\Eloquent\Collection;
 
 class AreaEloquentRepository implements AreaRepositoryInterface
 {

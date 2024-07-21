@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repositories\Attendance;
 
 use App\Models\Attendance;
+use Illuminate\Database\Eloquent\Collection;
 
 class AttendanceEloquentRepository implements AttendanceRepositoryInterface
 {

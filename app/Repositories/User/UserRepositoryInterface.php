@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repositories\User;
 
+use Illuminate\Database\Eloquent\Collection;
+
 interface UserRepositoryInterface
 {
     /**

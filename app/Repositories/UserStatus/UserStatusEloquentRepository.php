@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repositories\UserStatus;
 
 use App\Models\UserStatus;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserStatusEloquentRepository implements UserStatusRepositoryInterface
 {
