@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Repositories\Area;
 
+use Illuminate\Database\Eloquent\Collection;
+
 interface AreaRepositoryInterface
 {
     /**
      * エリア一覧取得
      *
-     * @return object|null
+     * @return Collection
      */
-    public function getAreas(): object|null;
+    public function getAreas(): Collection;
 
     /**
      * エリア登録

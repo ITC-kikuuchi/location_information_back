@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repositories\Area;
 
 use App\Models\Area;
+use Illuminate\Database\Eloquent\Collection;
 
 class AreaEloquentRepository implements AreaRepositoryInterface
 {
@@ -21,9 +22,9 @@ class AreaEloquentRepository implements AreaRepositoryInterface
     /**
      * エリア一覧取得
      *
-     * @return object|null
+     * @return Collection
      */
-    public function getAreas(): object|null
+    public function getAreas(): Collection
     {
         return $this->area->get();
     }

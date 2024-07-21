@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repositories\UserStatus;
 
 use App\Models\UserStatus;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserStatusEloquentRepository implements UserStatusRepositoryInterface
 {
@@ -21,9 +22,9 @@ class UserStatusEloquentRepository implements UserStatusRepositoryInterface
     /**
      * ユーザステータス一覧取得
      *
-     * @return object|null
+     * @return Collection
      */
-    public function getUserStatuses(): object|null
+    public function getUserStatuses(): Collection
     {
         return $this->userStatus->get();
     }
