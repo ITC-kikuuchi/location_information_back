@@ -121,8 +121,8 @@ class UserLocationService
                 // 勤怠ID が存在した場合
                 $userLocation = [
                     User::ATTENDANCE_ID => $request[User::ATTENDANCE_ID],
-                    User::AREA_ID => SettingLocation::getAreaId($request[User::ATTENDANCE_ID], $user[User::DEFAULT_AREA_ID]),
-                    User::USER_STATUS_ID => SettingLocation::getUserStatusId($request[User::ATTENDANCE_ID])
+                    User::AREA_ID => SettingLocation::settingAreaId($request[User::ATTENDANCE_ID], $user[User::DEFAULT_AREA_ID]),
+                    User::USER_STATUS_ID => SettingLocation::settingUserStatusId($request[User::ATTENDANCE_ID])
                 ];
             } else {
                 // エリアID または ユーザステータスID が存在した場合

@@ -14,13 +14,13 @@ enum SettingLocation: int
     case FIVE = 5;
 
     /**
-     * 勤怠ID に紐づく エリアID の返却
+     * 勤怠ID に紐づく エリアID の設定
      *
      * @param integer $attendance_id
      * @param integer $default_area_id
      * @return integer
      */
-    public static function getAreaId(int $attendance_id, int $default_area_id): int
+    public static function settingAreaId(int $attendance_id, int $default_area_id): int
     {
         return match ($attendance_id) {
             self::ONE->value => $default_area_id,
@@ -32,12 +32,12 @@ enum SettingLocation: int
     }
 
     /**
-     * 勤怠ID に紐づく ステータスID の返却
+     * 勤怠ID に紐づく ステータスID の設定
      *
      * @param integer $attendance_id
      * @return integer
      */
-    public static function getUserStatusId(int $attendance_id): int
+    public static function settingUserStatusId(int $attendance_id): int
     {
         return match ($attendance_id) {
             self::ONE->value => UserStatus::OWN_SEAT->value,
